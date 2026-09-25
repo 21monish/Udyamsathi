@@ -1,130 +1,28 @@
-import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowRight, BadgeCheck, Calculator, Landmark, MapPin, ShieldCheck, Sparkles } from 'lucide-react';
 
-const features = [
-  { icon: '🎯', title: 'Smart Eligibility Check', description: 'Answer a few questions about your needs and get matched with government schemes you may qualify for.' },
-  { icon: '📋', title: 'Scheme Database', description: 'Browse NSFDC, MUDRA, PMEGP, Stand-Up India and other schemes with verified eligibility criteria.' },
-  { icon: '🧮', title: 'EMI Calculator', description: 'Calculate your monthly payments, total interest, and view detailed amortization schedules.' },
-  { icon: '📍', title: 'Partner Locator', description: 'Find nearby authorized channel partners — SCAs, banks, and RRBs — on an interactive map.' },
-  { icon: '🤖', title: 'AI Assistant', description: 'Ask in English, Hindi, or Gujarati. Our AI extracts your needs and finds matching schemes.' },
-  { icon: '🌐', title: 'Multilingual Support', description: 'Full support for English, Hindi, and Gujarati — including scheme explanations and document guidance.' },
+const sectors = [
+  { title: 'Agriculture & allied farming', image: '/images/agriculture.jpg', copy: 'Finance for equipment, dairy, irrigation and sustainable farm ventures.', tag: 'Agriculture', href: '/schemes?purpose=agriculture' },
+  { title: 'Small business & MSME', image: '/images/business.jpg', copy: 'Build, expand, or strengthen a manufacturing or service business.', tag: 'Business', href: '/schemes?purpose=business' },
+  { title: 'Street vendors', image: '/images/vendors.jpg', copy: 'Working-capital support for daily livelihood businesses.', tag: 'Micro-enterprise', href: '/schemes?search=svanidhi' },
+  { title: 'Artisans & craftspeople', image: '/images/artisans.jpg', copy: 'Credit and skill support for India’s traditional crafts.', tag: 'Artisans', href: '/schemes?search=vishwakarma' },
 ];
-
-const steps = [
-  { num: '1', title: 'Tell Us Your Needs', desc: 'Share your purpose, income, and loan requirement' },
-  { num: '2', title: 'Get Matched', desc: 'Our engine checks your eligibility against all schemes' },
-  { num: '3', title: 'Calculate EMI', desc: 'Understand your monthly payments and total cost' },
-  { num: '4', title: 'Find a Partner', desc: 'Locate the nearest authorized channel partner' },
-  { num: '5', title: 'Apply', desc: 'Get your document checklist and apply through the partner' },
+const services = [
+  { icon: Sparkles, title: 'Find your best fit', copy: 'A guided check matches your profile with relevant schemes.' },
+  { icon: Calculator, title: 'Plan before you apply', copy: 'See a clear EMI estimate, interest cost, and repayment picture.' },
+  { icon: MapPin, title: 'Reach the right partner', copy: 'Locate an authorised SCA, bank, RRB, or lending partner near you.' },
 ];
+const steps = ['Share your goal and basic details', 'Review your eligible scheme matches', 'Estimate your repayment with the EMI tool', 'Connect with an authorised partner'];
 
 export default function HomePage() {
-  return (
-    <div>
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white">
-        <div className="container mx-auto px-4 py-20 md:py-28">
-          <div className="max-w-3xl">
-            <span className="inline-block mb-4 px-3 py-1 text-sm bg-white/20 rounded-full">
-              SIH 2026 • Problem Statement 26092
-            </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-              Find the Right Government Scheme for{' '}
-              <span className="text-yellow-300">Your Business</span>
-            </h1>
-            <p className="text-lg md:text-xl text-blue-100 mb-8 max-w-2xl">
-              SchemeSetu matches you with government financial assistance schemes based on your eligibility.
-              Get transparent recommendations, calculate EMI, and find nearby partners — all in one place.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/eligibility" className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-blue-700 bg-white rounded-lg hover:bg-gray-100 transition">
-                Check Your Eligibility
-              </Link>
-              <Link href="/schemes" className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white border-2 border-white rounded-lg hover:bg-white/10 transition">
-                Browse Schemes
-              </Link>
-            </div>
-          </div>
-        </div>
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 60L1440 60L1440 30C1440 30 1080 0 720 0C360 0 0 30 0 30L0 60Z" fill="white" />
-          </svg>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="container mx-auto px-4 py-16 md:py-24">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Everything You Need</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            From eligibility checks to partner locator — a complete platform for accessing government financial schemes.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((f) => (
-            <div key={f.title} className="rounded-xl border bg-white p-6 hover:shadow-lg transition-shadow">
-              <div className="text-3xl mb-3">{f.icon}</div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">{f.title}</h3>
-              <p className="text-gray-600">{f.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section className="bg-gray-50 py-16 md:py-24">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">How It Works</h2>
-            <p className="text-lg text-gray-600">Five simple steps to find your scheme</p>
-          </div>
-          <div className="flex flex-col md:flex-row items-start justify-center gap-4 md:gap-0">
-            {steps.map((s, i) => (
-              <React.Fragment key={s.num}>
-                <div className="flex flex-col items-center text-center max-w-[200px] mx-auto md:mx-0">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white font-bold text-lg mb-3">
-                    {s.num}
-                  </div>
-                  <h3 className="font-semibold text-gray-900 mb-1">{s.title}</h3>
-                  <p className="text-sm text-gray-600">{s.desc}</p>
-                </div>
-                {i < steps.length - 1 && (
-                  <div className="hidden md:flex items-center pt-6 px-2">
-                    <div className="w-12 h-0.5 bg-blue-300" />
-                    <span className="text-blue-400">→</span>
-                    <div className="w-12 h-0.5 bg-blue-300" />
-                  </div>
-                )}
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="container mx-auto px-4 py-16 md:py-24">
-        <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-8 md:p-12 text-center text-white">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Find Your Scheme?</h2>
-          <p className="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
-            Answer a few questions and discover which government financial assistance schemes you may qualify for.
-          </p>
-          <Link href="/eligibility" className="inline-flex items-center px-6 py-3 text-base font-semibold text-blue-700 bg-white rounded-lg hover:bg-gray-100 transition">
-            Start Eligibility Check →
-          </Link>
-        </div>
-      </section>
-
-      {/* Data Disclaimer */}
-      <section className="bg-yellow-50 border-t border-yellow-200 py-4">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-sm text-yellow-800">
-            ⚠️ <strong>Hackathon Demo:</strong> Scheme data shown is for demonstration purposes. Always verify eligibility with official sources like{' '}
-            <a href="https://nsfdc.nic.in" target="_blank" rel="noopener noreferrer" className="underline">NSFDC</a>{' '}
-            or <a href="https://www.jansamarth.in" target="_blank" rel="noopener noreferrer" className="underline">JanSamarth</a>.
-          </p>
-        </div>
-      </section>
-    </div>
-  );
+  return <div className="overflow-hidden bg-[#f8faf7]">
+    <section className="relative isolate overflow-hidden bg-[#073b35] text-white"><div className="absolute inset-0 opacity-20 [background-image:radial-gradient(#d9b454_1px,transparent_1px)] [background-size:22px_22px]" /><div className="absolute -right-28 -top-40 h-[35rem] w-[35rem] rounded-full bg-[#16856e]/40 blur-3xl" />
+      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 lg:grid-cols-[1.05fr_.95fr] lg:px-8 lg:py-24"><div><div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-semibold tracking-wide text-[#f6da85]"><BadgeCheck className="h-4 w-4" /> A guided financial-access platform</div><h1 className="max-w-3xl text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">The right financial scheme, made easier to find.</h1><p className="mt-6 max-w-2xl text-lg leading-8 text-emerald-50/80">UdyamSathi helps entrepreneurs, farmers, vendors and artisans understand government credit support, calculate repayments, and find the right channel partner.</p><div className="mt-8 flex flex-col gap-3 sm:flex-row"><Link href="/eligibility" className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#e8bd52] px-5 py-3.5 font-semibold text-[#17372f] transition hover:bg-[#f5d57f]">Check eligibility <ArrowRight className="h-4 w-4" /></Link><Link href="/schemes" className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/30 px-5 py-3.5 font-semibold text-white transition hover:bg-white/10">Explore schemes</Link></div><div className="mt-10 grid max-w-xl grid-cols-3 gap-4 border-t border-white/15 pt-6">{[['Clear', 'eligibility checks'], ['Simple', 'repayment planning'], ['Local', 'partner discovery']].map(([strong, text]) => <p className="text-sm text-emerald-50/75" key={strong}><strong className="block text-base text-white">{strong}</strong>{text}</p>)}</div></div><div className="relative mx-auto w-full max-w-lg"><div className="relative overflow-hidden rounded-[2rem] border border-white/20 bg-white p-3 shadow-2xl shadow-black/30"><Image src="/images/business.jpg" alt="Entrepreneur working in a small business" width={900} height={700} priority className="h-[350px] w-full rounded-[1.4rem] object-cover sm:h-[430px]" /><div className="absolute bottom-8 left-8 right-8 rounded-2xl bg-white/95 p-4 text-slate-900 shadow-lg backdrop-blur"><div className="flex items-start gap-3"><div className="rounded-xl bg-emerald-100 p-2 text-emerald-800"><Sparkles className="h-5 w-5" /></div><div><p className="text-xs font-bold uppercase tracking-wider text-emerald-700">Your starting point</p><p className="mt-1 font-semibold">Tell us your goal. We’ll help you find the next step.</p></div></div></div></div></div></div>
+    </section>
+    <section className="bg-white py-16 lg:py-24"><div className="mx-auto max-w-7xl px-5 lg:px-8"><div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-end"><div><p className="section-kicker">A better route to support</p><h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Built around the decisions that matter.</h2></div><p className="max-w-2xl text-lg leading-8 text-slate-600">Move from uncertainty to a clear action plan — without needing to know every programme or lender in advance.</p></div><div className="mt-10 grid gap-5 md:grid-cols-3">{services.map(({ icon: Icon, title, copy }, i) => <article key={title} className="group rounded-2xl border border-slate-200 bg-[#fcfdfb] p-6 transition hover:-translate-y-1 hover:border-emerald-200 hover:shadow-xl hover:shadow-emerald-950/5"><div className="flex items-center justify-between"><div className="rounded-xl bg-emerald-100 p-3 text-emerald-800"><Icon className="h-6 w-6" /></div><span className="text-sm font-semibold text-slate-400">0{i + 1}</span></div><h3 className="mt-6 text-xl font-semibold text-slate-900">{title}</h3><p className="mt-2 leading-7 text-slate-600">{copy}</p></article>)}</div></div></section>
+    <section className="bg-[#eef5f0] py-16 lg:py-24"><div className="mx-auto max-w-7xl px-5 lg:px-8"><div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end"><div><p className="section-kicker">Support for every livelihood</p><h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Start with what you do.</h2></div><Link href="/schemes" className="inline-flex items-center gap-2 font-semibold text-emerald-800 hover:text-emerald-600">View all schemes <ArrowRight className="h-4 w-4" /></Link></div><div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{sectors.map((sector) => <Link href={sector.href} key={sector.title} className="group overflow-hidden rounded-2xl bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"><div className="relative h-48 overflow-hidden"><Image src={sector.image} alt={sector.title} fill sizes="(max-width: 1024px) 50vw, 25vw" className="object-cover transition duration-500 group-hover:scale-105"/><span className="absolute left-4 top-4 rounded-full bg-white/90 px-2.5 py-1 text-xs font-bold text-emerald-900 backdrop-blur">{sector.tag}</span></div><div className="p-5"><h3 className="text-lg font-semibold text-slate-900">{sector.title}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{sector.copy}</p><span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-emerald-700">Find support <ArrowRight className="h-4 w-4" /></span></div></Link>)}</div></div></section>
+    <section className="bg-white py-16 lg:py-24"><div className="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[.9fr_1.1fr] lg:px-8"><div className="rounded-3xl bg-[#123f37] p-8 text-white sm:p-10"><div className="w-fit rounded-xl bg-white/10 p-3"><Landmark className="h-6 w-6 text-[#e8bd52]" /></div><h2 className="mt-7 text-3xl font-semibold leading-tight">A clear path from question to application.</h2><p className="mt-4 leading-7 text-emerald-50/75">We turn complex scheme information into practical, understandable choices.</p><Link href="/application-guide" className="mt-8 inline-flex items-center gap-2 font-semibold text-[#f5d57f]">Read the application guide <ArrowRight className="h-4 w-4" /></Link></div><div className="grid content-center gap-5">{steps.map((step, i) => <div key={step} className="flex gap-4"><div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#e9f3ed] text-sm font-bold text-emerald-800">{i + 1}</div><div className="border-b border-slate-100 pb-5"><h3 className="font-semibold text-slate-900">{step}</h3><p className="mt-1 text-sm text-slate-600">{i === 0 ? 'No paperwork required to begin.' : i === 1 ? 'Get focused, understandable recommendations.' : i === 2 ? 'Know what you can comfortably afford.' : 'Prepare confidently for the next conversation.'}</p></div></div>)}</div></div></section>
+    <section className="px-5 pb-16 lg:pb-24"><div className="mx-auto max-w-7xl rounded-3xl bg-[#e8bd52] px-7 py-10 sm:px-12 sm:py-14"><div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between"><div><p className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-[#674f14]"><ShieldCheck className="h-4 w-4" /> Start with clarity</p><h2 className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight text-[#193830] sm:text-4xl">Find the support that fits your ambition.</h2></div><Link href="/eligibility" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-[#133c34] px-5 py-3.5 font-semibold text-white transition hover:bg-[#0a2c26]">Start eligibility check <ArrowRight className="h-4 w-4" /></Link></div></div></section>
+  </div>;
 }

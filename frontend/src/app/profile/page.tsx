@@ -1,8 +1,3 @@
-export default function ProfilePage() {
-  return (
-    <div className="container mx-auto px-4 py-16">
-      <h1 className="text-3xl font-bold text-gray-900 mb-4">Profile</h1>
-      <p className="text-gray-600">User profile page coming in Day 2.</p>
-    </div>
-  );
-}
+'use client';
+import { FormEvent, useState } from 'react'; import { useAuth } from '@/lib/auth'; import IndiaStateSelect from '@/components/forms/IndiaStateSelect';
+export default function ProfilePage(){const {user}=useAuth();const [saved,setSaved]=useState(false);const [state,setState]=useState('Gujarat');const submit=(e:FormEvent)=>{e.preventDefault();setSaved(true)};return <div className="container mx-auto max-w-3xl px-4 py-12"><h1 className="text-4xl font-bold">Your profile</h1><p className="mt-2 text-slate-600">This information makes the eligibility check faster. It stays editable.</p><form onSubmit={submit} className="mt-8 rounded-2xl border p-7"><div className="grid gap-5 sm:grid-cols-2"><label className="text-sm font-medium">Full name<input defaultValue={user?.name} className="mt-1 w-full rounded-lg border p-3"/></label><label className="text-sm font-medium">Email<input defaultValue={user?.email} className="mt-1 w-full rounded-lg border p-3"/></label><label className="text-sm font-medium">Annual family income<input type="number" placeholder="e.g. 300000" className="mt-1 w-full rounded-lg border p-3"/></label><label className="text-sm font-medium">Category<select className="mt-1 w-full rounded-lg border p-3"><option>SC</option><option>ST</option><option>OBC</option><option>GENERAL</option></select></label><label className="text-sm font-medium">State or Union Territory<IndiaStateSelect value={state} onChange={setState} /></label><label className="text-sm font-medium">District<input placeholder="Your district" className="mt-1 w-full rounded-lg border p-3"/></label></div>{saved&&<p className="mt-5 rounded-lg bg-green-50 p-3 text-sm text-green-800">Profile saved for this browser demo.</p>}<button className="mt-6 rounded-lg bg-blue-700 px-5 py-3 font-semibold text-white">Save profile</button></form></div>}

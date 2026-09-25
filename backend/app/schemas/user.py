@@ -45,3 +45,20 @@ class ProfileUpdate(BaseModel):
     district: Optional[str] = None
     state: Optional[str] = None
     pincode: Optional[str] = None
+
+
+class UserAdminCreate(BaseModel):
+    name: str
+    email: str
+    password: str = "password123"
+    role: str = "BENEFICIARY"
+    mobile: Optional[str] = None
+    language: Optional[str] = "en"
+
+
+class UserAdminUpdate(BaseModel):
+    name: Optional[str] = None
+    email: Optional[str] = None
+    role: Optional[str] = None
+    mobile: Optional[str] = None
+    language: Optional[str] = None

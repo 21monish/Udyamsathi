@@ -1,8 +1,3 @@
-export default function RegisterPage() {
-  return (
-    <div className="container mx-auto px-4 py-16">
-      <h1 className="text-3xl font-bold text-gray-900 mb-4">Register</h1>
-      <p className="text-gray-600">Registration form coming in Day 2.</p>
-    </div>
-  );
-}
+'use client';
+import Link from 'next/link'; import { FormEvent, useState } from 'react'; import { useRouter } from 'next/navigation'; import { useAuth } from '@/lib/auth';
+export default function RegisterPage(){const {register}=useAuth();const router=useRouter();const [form,setForm]=useState({name:'',email:'',mobile:'',password:'',language:'en'});const [error,setError]=useState('');async function submit(e:FormEvent){e.preventDefault();setError('');try{await register(form);router.push('/profile')}catch{setError('Registration needs the FastAPI backend running on port 8001. The core scheme tools are available without an account.')}}return <div className="mx-auto max-w-md px-4 py-16"><div className="rounded-2xl border bg-white p-7 shadow-sm"><h1 className="text-3xl font-bold">Create your account</h1><p className="mt-2 text-sm text-slate-600">Save your profile for faster eligibility checks.</p><form onSubmit={submit} className="mt-6 space-y-4">{[['name','Full name','text'],['email','Email','email'],['mobile','Mobile number','tel'],['password','Password','password']].map(([key,label,type])=><label key={key} className="block text-sm font-medium">{label}<input type={type} required={key!=='mobile'} value={form[key as keyof typeof form]} onChange={e=>setForm({...form,[key]:e.target.value})} className="mt-1 w-full rounded-lg border p-3"/></label>)}{error&&<p className="rounded bg-amber-50 p-3 text-sm text-amber-900">{error}</p>}<button className="w-full rounded-lg bg-blue-700 py-3 font-semibold text-white">Create account</button></form><p className="mt-5 text-center text-sm">Already registered? <Link href="/auth/login" className="font-semibold text-blue-700">Login</Link></p></div></div>}

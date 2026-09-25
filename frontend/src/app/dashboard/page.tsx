@@ -1,8 +1,3 @@
-export default function DashboardPage() {
-  return (
-    <div className="container mx-auto px-4 py-16">
-      <h1 className="text-3xl font-bold text-gray-900 mb-4">Dashboard</h1>
-      <p className="text-gray-600">Applicant dashboard coming in Sprint 5.</p>
-    </div>
-  );
-}
+'use client';
+import Link from 'next/link'; import { useAuth } from '@/lib/auth';
+export default function DashboardPage(){const {user}=useAuth();return <div className="container mx-auto max-w-6xl px-4 py-12"><h1 className="text-4xl font-bold">Good to see you{user?`, ${user.name}`:''}</h1><p className="mt-2 text-slate-600">Continue your journey to the right financial support.</p><div className="mt-8 grid gap-4 md:grid-cols-3"><div className="rounded-xl border p-5"><p className="text-sm text-slate-500">Profile status</p><b className="mt-1 block text-2xl text-blue-700">In progress</b><Link href="/profile" className="mt-3 block text-sm font-semibold text-blue-700">Complete profile →</Link></div><div className="rounded-xl border p-5"><p className="text-sm text-slate-500">Saved recommendations</p><b className="mt-1 block text-2xl">0</b><Link href="/eligibility" className="mt-3 block text-sm font-semibold text-blue-700">Check eligibility →</Link></div><div className="rounded-xl border p-5"><p className="text-sm text-slate-500">Application status</p><b className="mt-1 block text-2xl">No application</b><Link href="/partners" className="mt-3 block text-sm font-semibold text-blue-700">Find a partner →</Link></div></div><section className="mt-8 rounded-2xl bg-slate-50 p-7"><h2 className="text-2xl font-bold">Your next best step</h2><p className="mt-2 text-slate-600">Complete the short eligibility questionnaire. You will receive an explainable list of eligible schemes and a document checklist.</p><Link href="/eligibility" className="mt-5 inline-block rounded-lg bg-blue-700 px-5 py-3 font-semibold text-white">Start eligibility check</Link></section></div>}

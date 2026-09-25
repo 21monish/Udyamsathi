@@ -1,8 +1,3 @@
-export default function LoginPage() {
-  return (
-    <div className="container mx-auto px-4 py-16">
-      <h1 className="text-3xl font-bold text-gray-900 mb-4">Login</h1>
-      <p className="text-gray-600">Login form coming in Day 2.</p>
-    </div>
-  );
-}
+'use client';
+import Link from 'next/link'; import { FormEvent, useState } from 'react'; import { useRouter } from 'next/navigation'; import { useAuth } from '@/lib/auth';
+export default function LoginPage(){const {login}=useAuth();const router=useRouter();const [email,setEmail]=useState('test@udyamsathi.in');const [password,setPassword]=useState('test123');const [error,setError]=useState('');async function submit(e:FormEvent){e.preventDefault();setError('');try{await login({email,password});router.push('/dashboard')}catch{setError('The API is not running yet. Use the demo account after starting the backend, or continue with the public tools.')}}return <div className="mx-auto max-w-md px-4 py-16"><div className="rounded-2xl border bg-white p-7 shadow-sm"><h1 className="text-3xl font-bold">Welcome back</h1><p className="mt-2 text-sm text-slate-600">Sign in to save your profile and recommendations.</p><form onSubmit={submit} className="mt-6 space-y-4"><label className="block text-sm font-medium">Email<input type="email" required value={email} onChange={e=>setEmail(e.target.value)} className="mt-1 w-full rounded-lg border p-3"/></label><label className="block text-sm font-medium">Password<input type="password" required value={password} onChange={e=>setPassword(e.target.value)} className="mt-1 w-full rounded-lg border p-3"/></label>{error&&<p className="rounded bg-amber-50 p-3 text-sm text-amber-900">{error}</p>}<button className="w-full rounded-lg bg-blue-700 py-3 font-semibold text-white">Login</button></form><p className="mt-5 text-center text-sm">New here? <Link href="/auth/register" className="font-semibold text-blue-700">Create an account</Link></p></div></div>}

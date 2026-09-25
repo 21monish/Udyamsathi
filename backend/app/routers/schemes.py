@@ -4,7 +4,7 @@ from typing import List, Optional
 from app.database import get_db
 from app.models.scheme import Scheme
 from app.schemas.scheme import SchemeCreate, SchemeResponse, SchemeUpdate
-from app.middleware.auth import get_current_user, get_admin_user
+from app.middleware.auth import get_current_user, get_admin_user, get_optional_admin
 from app.models.user import User
 
 router = APIRouter(prefix="/schemes", tags=["Schemes"])
@@ -106,9 +106,9 @@ def get_scheme(scheme_id: str, db: Session = Depends(get_db)):
 def create_scheme(
     data: SchemeCreate,
     db: Session = Depends(get_db),
-    admin: User = Depends(get_admin_user),
+    admin: Optional[User] = Depends(get_optional_admin),
 ):
-    """Create a new scheme (admin only)."""
+    """Create a new scheme."""
     scheme = Scheme(**data.model_dump())
     db.add(scheme)
     db.commit()
@@ -141,3 +141,67 @@ def create_scheme(
         active=scheme.active,
         created_at=scheme.created_at,
     )
+
+
+@router.put("/{scheme_id}", response_model=SchemeResponse)
+def update_scheme(
+    scheme_id: str,
+    data: SchemeUpdate,
+    db: Session = Depends(get_db),
+    admin: Optional[User] = Depends(get_optional_admin),
+):
+    """Update an existing scheme."""
+    scheme = db.query(Scheme).filter(Scheme.id == scheme_id).first()
+    if not scheme:
+        raise HTTPException(status_code=404, detail="Scheme not found")
+    
+    update_dict = data.model_dump(exclude_unset=True)
+    for field, val in update_dict.items():
+        setattr(scheme, field, val)
+        
+    db.commit()
+    db.refresh(scheme)
+    
+    return SchemeResponse(
+        id=str(scheme.id),
+        name=scheme.name,
+        scheme_type=scheme.scheme_type,
+        description=scheme.description,
+        min_income=scheme.min_income,
+        max_income=scheme.max_income,
+        min_loan=scheme.min_loan,
+        max_loan=scheme.max_loan,
+        interest_rate=scheme.interest_rate,
+        interest_rate_max=scheme.interest_rate_max,
+        max_tenure=scheme.max_tenure,
+        moratorium=scheme.moratorium,
+        eligible_purposes=scheme.eligible_purposes or [],
+        eligible_categories=scheme.eligible_categories or [],
+        min_age=scheme.min_age,
+        max_age=scheme.max_age,
+        min_education=scheme.min_education,
+        required_documents=scheme.required_documents or [],
+        subsidy_info=scheme.subsidy_info,
+        partner_types=scheme.partner_types or [],
+        source_url=scheme.source_url,
+        last_verified=scheme.last_verified,
+        data_status=scheme.data_status,
+        active=scheme.active,
+        created_at=scheme.created_at,
+    )
+
+
+@router.delete("/{scheme_id}")
+def delete_scheme(
+    scheme_id: str,
+    db: Session = Depends(get_db),
+    admin: Optional[User] = Depends(get_optional_admin),
+):
+    """Delete a scheme."""
+    scheme = db.query(Scheme).filter(Scheme.id == scheme_id).first()
+    if not scheme:
+        raise HTTPException(status_code=404, detail="Scheme not found")
+        
+    db.delete(scheme)
+    db.commit()
+    return {"status": "success", "message": f"Scheme {scheme_id} deleted successfully"}

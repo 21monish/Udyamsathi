@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import get_settings
-from app.routers import auth, schemes
+from app.routers import auth, schemes, assistant, eligibility, calculator, partners
 
 settings = get_settings()
 
@@ -29,6 +29,10 @@ app.add_middleware(
 # Include routers under /api/v1
 app.include_router(auth.router, prefix="/api/v1")
 app.include_router(schemes.router, prefix="/api/v1")
+app.include_router(assistant.router, prefix="/api/v1")
+app.include_router(eligibility.router, prefix="/api/v1")
+app.include_router(calculator.router, prefix="/api/v1")
+app.include_router(partners.router, prefix="/api/v1")
 
 
 @app.get("/")

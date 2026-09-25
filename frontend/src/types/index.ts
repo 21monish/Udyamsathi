@@ -156,6 +156,8 @@ export interface EMIResult {
   amortization_schedule: AmortizationEntry[];
 }
 
+export type EMIResponse = EMIResult;
+
 export interface AmortizationEntry {
   month: number;
   emi: number;

@@ -8,7 +8,7 @@ import Footer from '@/components/layout/Footer';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'SchemeSetu - AI-Driven Scheme Matching for Entrepreneurs',
+  title: 'UdyamSathi - AI-Driven Scheme Matching for Entrepreneurs',
   description: 'Find the right government financial assistance scheme based on your eligibility. Get personalized recommendations, EMI calculations, and locate nearby channel partners.',
 };
 
