@@ -1,5 +1,6 @@
-from pydantic import BaseModel, Field
-from typing import Optional, List
+from pydantic import BaseModel, Field, field_serializer
+from typing import Optional, List, Union
+from uuid import UUID
 
 
 class EligibilityInput(BaseModel):
@@ -9,6 +10,8 @@ class EligibilityInput(BaseModel):
     loan_amount: float = Field(..., gt=0, description="Requested loan amount in INR")
     age: int = Field(..., ge=18, le=100, description="Applicant age")
     category: str = Field(..., description="Social category: SC, ST, OBC, GENERAL")
+    gender: Optional[str] = Field(default="male", description="Applicant gender: male, female, other")
+    project_cost: Optional[float] = Field(default=None, description="Total project cost in INR")
     education_status: str = Field(default="none", description="Education level")
     state: str = Field(default="", description="State of residence")
     district: str = Field(default="", description="District of residence")
@@ -23,7 +26,7 @@ class EligibilityCheck(BaseModel):
 
 class SchemeRecommendation(BaseModel):
     """Recommendation result for a single scheme."""
-    scheme_id: str
+    scheme_id: Union[str, UUID]
     scheme_name: str
     scheme_type: str
     eligible: bool
@@ -32,6 +35,9 @@ class SchemeRecommendation(BaseModel):
     total_checks: int
     max_loan: float
     interest_rate: float
+    effective_interest_rate: float
+    female_rebate_applied: bool = False
+    max_eligible_loan_by_project_cost: Optional[float] = None
     interest_rate_max: Optional[float] = None
     max_tenure: int
     description: str
@@ -39,6 +45,11 @@ class SchemeRecommendation(BaseModel):
     subsidy_info: Optional[str] = None
     source_url: Optional[str] = None
     data_status: str
+    reasoning: List[str] = []
+
+    @field_serializer("scheme_id")
+    def serialize_scheme_id(self, v: Union[str, UUID]) -> str:
+        return str(v)
 
 
 class EligibilityResponse(BaseModel):

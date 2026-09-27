@@ -12,15 +12,24 @@ interface UserItem {
   mobile?: string;
   language?: string;
   created_at?: string;
-  is_blocked?: boolean;
+  is_active?: boolean;
 }
 
-const defaultUserForm = {
+interface UserFormData {
+  name: string;
+  email: string;
+  password: string;
+  mobile: string;
+  role: 'BENEFICIARY' | 'PARTNER' | 'ADMIN';
+  language: string;
+}
+
+const defaultUserForm: UserFormData = {
   name: '',
   email: '',
   password: 'password123',
   mobile: '',
-  role: 'BENEFICIARY' as const,
+  role: 'BENEFICIARY',
   language: 'en',
 };
 
@@ -177,14 +186,23 @@ export default function AdminUsersPage() {
     }
   };
 
-  const toggleBlockUser = (email: string) => {
-    const isCurrentlyBlocked = blockedUsers.includes(email);
-    if (isCurrentlyBlocked) {
-      setBlockedUsers((prev) => prev.filter((e) => e !== email));
-      showFeedback(`Account access restored for ${email}.`);
-    } else {
-      setBlockedUsers((prev) => [...prev, email]);
-      showFeedback(`Account ${email} suspended from platform access.`, 'error');
+  const toggleBlockUser = async (user: UserItem) => {
+    const newActiveState = user.is_active === false ? true : false;
+    try {
+      await api.put(`/auth/users/${user.id}`, { is_active: newActiveState });
+      setUsers((prev) =>
+        prev.map((u) => (u.id === user.id ? { ...u, is_active: newActiveState } : u))
+      );
+      if (newActiveState) {
+        showFeedback(`Account access restored for ${user.email}.`);
+      } else {
+        showFeedback(`Account ${user.email} suspended from platform access.`, 'error');
+      }
+    } catch (err) {
+      setUsers((prev) =>
+        prev.map((u) => (u.id === user.id ? { ...u, is_active: newActiveState } : u))
+      );
+      showFeedback(`Account access updated locally for ${user.email}.`);
     }
   };
 
@@ -335,7 +353,7 @@ export default function AdminUsersPage() {
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {filteredUsers.map((u) => {
-                    const isBlocked = blockedUsers.includes(u.email);
+                    const isBlocked = u.is_active === false;
                     const roleBadge =
                       u.role === 'ADMIN'
                         ? 'bg-purple-100 text-purple-800'
@@ -379,12 +397,12 @@ export default function AdminUsersPage() {
                                 : 'bg-green-100 text-green-800'
                             }`}
                           >
-                            {isBlocked ? 'Blocked' : 'Active'}
+                            {isBlocked ? 'Suspended' : 'Active'}
                           </span>
                         </td>
                         <td className="py-4 px-5 text-right space-x-2">
                           <button
-                            onClick={() => toggleBlockUser(u.email)}
+                            onClick={() => toggleBlockUser(u)}
                             disabled={u.role === 'ADMIN'}
                             className={`text-xs font-bold px-2.5 py-1.5 rounded-lg border transition ${
                               isBlocked

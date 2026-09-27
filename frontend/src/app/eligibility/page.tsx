@@ -11,8 +11,10 @@ export default function EligibilityPage() {
     purpose: 'business',
     annual_income: 300000,
     loan_amount: 200000,
+    project_cost: 250000,
     age: 28,
     category: 'SC',
+    gender: 'male',
     education_status: '12th_standard',
     state: 'Gujarat',
     district: 'Ahmedabad',
@@ -88,7 +90,7 @@ export default function EligibilityPage() {
             </div>
 
             {/* Step 2: Financial Requirements */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t">
               <div>
                 <label className="block text-sm font-bold text-gray-900 mb-1">
                   2. Annual Family Income (₹)
@@ -109,16 +111,40 @@ export default function EligibilityPage() {
                 />
                 <div className="flex justify-between text-xs text-gray-400 mt-1">
                   <span>Selected: {formatCurrency(formData.annual_income)}</span>
-                  <span>Cap for SC schemes: ₹5 Lakh</span>
+                  <span>Cap for SC: ₹5 Lakh</span>
                 </div>
               </div>
 
               <div>
                 <label className="block text-sm font-bold text-gray-900 mb-1">
-                  3. Requested Loan / Benefit Amount (₹)
+                  3. Total Project Cost (₹)
                 </label>
                 <span className="text-xs text-gray-500 block mb-2">
-                  Total funding required for your project or activity
+                  Total estimated capital requirement for your enterprise
+                </span>
+                <input
+                  type="number"
+                  min="0"
+                  step="10000"
+                  value={formData.project_cost || 0}
+                  onChange={(e) =>
+                    setFormData({ ...formData, project_cost: Number(e.target.value) })
+                  }
+                  className="w-full px-4 py-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+                <div className="flex justify-between text-xs text-gray-400 mt-1">
+                  <span>Selected: {formatCurrency(formData.project_cost || 0)}</span>
+                  <span>NSFDC Share: Up to 90%</span>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-bold text-gray-900 mb-1">
+                  4. Requested Loan Amount (₹)
+                </label>
+                <span className="text-xs text-gray-500 block mb-2">
+                  Portion of project cost to be funded via scheme loan
                 </span>
                 <input
                   type="number"
@@ -137,11 +163,11 @@ export default function EligibilityPage() {
               </div>
             </div>
 
-            {/* Step 3: Social Category & Age */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t">
+            {/* Step 3: Social Category, Gender & Demographics */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 pt-4 border-t">
               <div>
                 <label className="block text-sm font-bold text-gray-900 mb-1">
-                  4. Social Category
+                  5. Social Category
                 </label>
                 <select
                   value={formData.category}
@@ -157,7 +183,22 @@ export default function EligibilityPage() {
 
               <div>
                 <label className="block text-sm font-bold text-gray-900 mb-1">
-                  5. Age (Years)
+                  6. Applicant Gender
+                </label>
+                <select
+                  value={formData.gender || 'male'}
+                  onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+                  className="w-full px-4 py-2.5 border rounded-lg text-sm bg-white focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="male">Male</option>
+                  <option value="female">Female (0.5% Interest Rebate)</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-bold text-gray-900 mb-1">
+                  7. Age (Years)
                 </label>
                 <input
                   type="number"
@@ -172,7 +213,7 @@ export default function EligibilityPage() {
 
               <div>
                 <label className="block text-sm font-bold text-gray-900 mb-1">
-                  6. Educational Status
+                  8. Educational Status
                 </label>
                 <select
                   value={formData.education_status}
@@ -253,9 +294,16 @@ export default function EligibilityPage() {
                   >
                     <div className="p-6 md:p-8">
                       <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                        <span className="text-xs font-bold px-2.5 py-1 rounded bg-emerald-100 text-emerald-800">
-                          {rec.scheme_type.replace('_', ' ')}
-                        </span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-bold px-2.5 py-1 rounded bg-emerald-100 text-emerald-800">
+                            {rec.scheme_type.replace('_', ' ')}
+                          </span>
+                          {rec.female_rebate_applied && (
+                            <span className="text-xs font-bold px-2.5 py-1 rounded bg-pink-100 text-pink-800 border border-pink-200 animate-pulse">
+                              🌸 0.5% Female Entrepreneur Rebate
+                            </span>
+                          )}
+                        </div>
                         <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
                           Passed All {rec.total_checks} Hard Criteria
                         </span>
@@ -272,7 +320,7 @@ export default function EligibilityPage() {
                       <p className="text-sm text-gray-600 mb-4">{rec.description}</p>
 
                       {/* Explainability Fit Factors Panel */}
-                      <div className="bg-emerald-50/70 rounded-xl border border-emerald-100 p-4 mb-6">
+                      <div className="bg-emerald-50/70 rounded-xl border border-emerald-100 p-4 mb-4">
                         <h5 className="text-xs font-bold uppercase tracking-wider text-emerald-900 mb-2">
                           Why You Qualify (Explainable Fit Factors):
                         </h5>
@@ -288,6 +336,23 @@ export default function EligibilityPage() {
                         </ul>
                       </div>
 
+                      {/* Statutory Operational Reasoning */}
+                      {rec.reasoning && rec.reasoning.length > 0 && (
+                        <div className="bg-blue-50/70 rounded-xl border border-blue-100 p-4 mb-6">
+                          <h5 className="text-xs font-bold uppercase tracking-wider text-blue-900 mb-2">
+                            Statutory NSFDC Operational Guidelines:
+                          </h5>
+                          <ul className="space-y-1 text-xs text-blue-900">
+                            {rec.reasoning.map((r, idx) => (
+                              <li key={idx} className="flex items-start gap-2">
+                                <span className="text-blue-600 font-bold">ℹ️</span>
+                                <span>{r}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
                       {/* Financial Metrics */}
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-gray-50 rounded-lg p-3 text-xs mb-6">
                         <div>
@@ -298,9 +363,18 @@ export default function EligibilityPage() {
                         </div>
                         <div>
                           <span className="text-gray-500 block">Interest Rate</span>
-                          <span className="font-bold text-emerald-600 text-sm">
-                            {rec.interest_rate === 0 ? '0% (Grant)' : `${rec.interest_rate}% p.a.`}
-                          </span>
+                          {rec.female_rebate_applied && rec.effective_interest_rate ? (
+                            <div className="flex items-baseline gap-1">
+                              <span className="line-through text-gray-400 text-xs">{rec.interest_rate}%</span>
+                              <span className="font-bold text-pink-600 text-sm">
+                                {rec.effective_interest_rate}% p.a.
+                              </span>
+                            </div>
+                          ) : (
+                            <span className="font-bold text-emerald-600 text-sm">
+                              {rec.interest_rate === 0 ? '0% (Grant)' : `${rec.interest_rate}% p.a.`}
+                            </span>
+                          )}
                         </div>
                         <div>
                           <span className="text-gray-500 block">Max Tenure</span>
@@ -326,7 +400,7 @@ export default function EligibilityPage() {
                         </Link>
                         {rec.interest_rate > 0 && rec.max_tenure > 0 && (
                           <Link
-                            href={`/calculator?principal=${formData.loan_amount}&rate=${rec.interest_rate}&tenure=${rec.max_tenure}`}
+                            href={`/calculator?principal=${formData.loan_amount}&rate=${rec.effective_interest_rate || rec.interest_rate}&tenure=${rec.max_tenure}`}
                             className="px-4 py-2 bg-white border border-gray-300 rounded-lg text-xs font-medium text-gray-700 hover:bg-gray-50"
                           >
                             Calculate My Monthly EMI

@@ -1,5 +1,6 @@
-from pydantic import BaseModel, Field
-from typing import Optional, List
+from pydantic import BaseModel, Field, field_serializer
+from typing import Optional, List, Union
+from uuid import UUID
 from datetime import datetime
 
 
@@ -28,7 +29,7 @@ class SchemeCreate(BaseModel):
 
 
 class SchemeResponse(BaseModel):
-    id: str
+    id: Union[str, UUID]
     name: str
     scheme_type: str
     description: str
@@ -53,6 +54,10 @@ class SchemeResponse(BaseModel):
     data_status: str
     active: bool
     created_at: datetime
+
+    @field_serializer("id")
+    def serialize_id(self, v: Union[str, UUID]) -> str:
+        return str(v)
 
     class Config:
         from_attributes = True

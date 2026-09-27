@@ -22,6 +22,7 @@ function PartnersContent() {
   const [selectedType, setSelectedType] = useState<string>('ALL');
   const [selectedDistrict, setSelectedDistrict] = useState<string>('ALL');
   const [schemeFilter, setSchemeFilter] = useState<string>('');
+  const [excludeHighNpa, setExcludeHighNpa] = useState<boolean>(false);
   const [geoLoading, setGeoLoading] = useState(false);
 
   // Pre-fill scheme from query params if navigated from scheme details
@@ -47,6 +48,9 @@ function PartnersContent() {
         if (schemeFilter) {
           url += `scheme_name=${encodeURIComponent(schemeFilter)}&`;
         }
+        if (excludeHighNpa) {
+          url += `exclude_high_npa=true&`;
+        }
 
         const res = await api.get<ChannelPartner[]>(url);
         setPartners(res.data);
@@ -58,7 +62,7 @@ function PartnersContent() {
     }
 
     fetchPartners();
-  }, [userCoords, selectedType, selectedDistrict, schemeFilter]);
+  }, [userCoords, selectedType, selectedDistrict, schemeFilter, excludeHighNpa]);
 
   const requestLocation = () => {
     setGeoLoading(true);
@@ -163,6 +167,24 @@ function PartnersContent() {
               />
             </div>
           </div>
+
+          {/* Quick Health Filter Bar */}
+          <div className="mt-4 pt-4 border-t border-gray-100 flex flex-wrap items-center justify-between gap-3">
+            <label className="inline-flex items-center gap-2 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={excludeHighNpa}
+                onChange={(e) => setExcludeHighNpa(e.target.checked)}
+                className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500 cursor-pointer"
+              />
+              <span className="text-xs font-semibold text-gray-700">
+                🛡️ Exclude High NPA (&gt;5%) & Non-Performing Branches
+              </span>
+            </label>
+            <span className="text-[11px] text-gray-400">
+              Showing {partners.length} verified disbursement offices
+            </span>
+          </div>
         </div>
 
         {/* Partners Grid */}
@@ -180,6 +202,7 @@ function PartnersContent() {
                 setSelectedType('ALL');
                 setSelectedDistrict('ALL');
                 setSchemeFilter('');
+                setExcludeHighNpa(false);
               }}
               className="px-4 py-2 bg-blue-600 text-white rounded-lg text-xs font-semibold"
             >
@@ -188,59 +211,102 @@ function PartnersContent() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {partners.map((partner) => (
-              <div
-                key={partner.id}
-                className="bg-white rounded-xl border hover:shadow-md transition p-6 flex flex-col justify-between"
-              >
-                <div>
-                  {/* Top Badges */}
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="text-xs font-bold px-2.5 py-0.5 rounded bg-blue-100 text-blue-800">
-                      {partner.type}
-                    </span>
-                    {partner.distance !== undefined && partner.distance !== null ? (
-                      <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
-                        📍 {partner.distance} km away
-                      </span>
-                    ) : (
-                      <span className="text-xs text-gray-500">{partner.district}</span>
-                    )}
-                  </div>
+            {partners.map((partner) => {
+              const npaRate = partner.npa_rate !== undefined ? partner.npa_rate : 3.2;
+              const isHighNpa = partner.is_npa_flagged || npaRate > 5.0;
+              const health = partner.health_score !== undefined ? partner.health_score : 88.0;
 
-                  <h3 className="text-lg font-bold text-gray-900 mb-1">{partner.name}</h3>
-                  <p className="text-xs text-gray-600 mb-3">{partner.address}</p>
-
-                  {/* Status & Contact */}
-                  <div className="flex flex-wrap gap-2 text-xs mb-4">
-                    <span className="inline-flex items-center gap-1 text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                      Accepting Applications
-                    </span>
-                    {partner.phone && (
-                      <span className="text-gray-600 bg-gray-100 px-2 py-0.5 rounded">
-                        📞 {partner.phone}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Supported Schemes */}
-                  <div className="mb-4">
-                    <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider block mb-1.5">
-                      Empaneled Schemes:
-                    </span>
-                    <div className="flex flex-wrap gap-1.5">
-                      {partner.supported_schemes?.map((scheme, idx) => (
-                        <span
-                          key={idx}
-                          className="text-[11px] bg-blue-50 text-blue-900 border border-blue-100 px-2 py-0.5 rounded font-medium"
-                        >
-                          {scheme}
+              return (
+                <div
+                  key={partner.id}
+                  className={`bg-white rounded-2xl border ${
+                    isHighNpa ? 'border-amber-300 bg-amber-50/20' : 'border-gray-200'
+                  } hover:shadow-lg transition p-6 flex flex-col justify-between`}
+                >
+                  <div>
+                    {/* Top Badges */}
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-xs font-bold px-2.5 py-0.5 rounded bg-blue-100 text-blue-800">
+                          {partner.type}
                         </span>
-                      ))}
+                        {isHighNpa ? (
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-red-100 text-red-800 border border-red-200">
+                            ⚠️ NPA: {npaRate}%
+                          </span>
+                        ) : (
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-200">
+                            ✓ NPA: {npaRate}% Prime
+                          </span>
+                        )}
+                      </div>
+                      {partner.distance !== undefined && partner.distance !== null ? (
+                        <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
+                          📍 {partner.distance} km away
+                        </span>
+                      ) : (
+                        <span className="text-xs text-gray-500">{partner.district}</span>
+                      )}
+                    </div>
+
+                    <h3 className="text-lg font-bold text-gray-900 mb-1">{partner.name}</h3>
+                    <p className="text-xs text-gray-600 mb-3">{partner.address}</p>
+
+                    {/* Operational Health Metrics Bar */}
+                    <div className="bg-slate-50 border border-slate-100 rounded-xl p-3 mb-4 space-y-2">
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="font-semibold text-slate-700">Health Index:</span>
+                        <span className="font-extrabold text-blue-700">{health}/100</span>
+                      </div>
+                      <div className="w-full bg-slate-200 rounded-full h-1.5">
+                        <div
+                          className={`h-1.5 rounded-full ${
+                            health >= 90 ? 'bg-emerald-500' : health >= 75 ? 'bg-blue-600' : 'bg-amber-500'
+                          }`}
+                          style={{ width: `${Math.min(100, Math.max(10, health))}%` }}
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 text-[11px] text-slate-500 pt-1">
+                        <div>Fund Utilization: <strong className="text-slate-800">{partner.fund_utilization || 85}%</strong></div>
+                        <div>Avg SLA: <strong className="text-slate-800">{partner.avg_processing_days || 14} Days</strong></div>
+                      </div>
+                    </div>
+
+                    {/* Status & Contact */}
+                    <div className="flex flex-wrap gap-2 text-xs mb-4">
+                      <span className="inline-flex items-center gap-1 text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                        {partner.capacity_status === 'FULL' ? 'Quota Full' : partner.capacity_status === 'LIMITED' ? 'Limited Capacity' : 'Available for Disbursal'}
+                      </span>
+                      {partner.phone && (
+                        <span className="text-gray-600 bg-gray-100 px-2 py-0.5 rounded">
+                          📞 {partner.phone}
+                        </span>
+                      )}
+                      {partner.working_hours && (
+                        <span className="text-gray-500 bg-gray-50 border border-gray-200 px-2 py-0.5 rounded text-[11px]">
+                          🕒 {partner.working_hours}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Supported Schemes */}
+                    <div className="mb-4">
+                      <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider block mb-1.5">
+                        Empaneled Schemes:
+                      </span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {partner.supported_schemes?.map((scheme, idx) => (
+                          <span
+                            key={idx}
+                            className="text-[11px] bg-blue-50 text-blue-900 border border-blue-100 px-2 py-0.5 rounded font-medium"
+                          >
+                            {scheme}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
 
                 {/* Card Actions */}
                 <div className="pt-4 border-t flex items-center justify-between gap-2">
@@ -266,7 +332,8 @@ function PartnersContent() {
                   )}
                 </div>
               </div>
-            ))}
+            );
+          })}
           </div>
         )}
       </div>

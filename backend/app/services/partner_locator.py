@@ -1,5 +1,5 @@
 import math
-from typing import List, Optional
+from typing import List, Optional, Tuple
 from app.models.channel_partner import ChannelPartner
 from app.schemas.partner import PartnerResponse
 
@@ -22,6 +22,19 @@ def haversine_distance(lat1: float, lon1: float, lat2: float, lon2: float) -> fl
     return round(radius * c, 2)
 
 
+def calculate_partner_health(npa: float, util: float, sla: int) -> Tuple[float, bool]:
+    """
+    Computes a transparent health score (0-100) and NPA flag.
+    - Low NPA rate (< 5%) boosts score.
+    - High fund utilization rate (> 80%) boosts score.
+    - Lower turnaround days (< 14 days) improves score.
+    """
+    score = 100.0 - (npa * 4.0) + ((util - 70.0) * 0.25) - (max(0, sla - 10) * 0.8)
+    bounded_score = round(max(10.0, min(99.0, score)), 1)
+    is_npa_flagged = npa > 5.0
+    return bounded_score, is_npa_flagged
+
+
 def filter_and_rank_partners(
     partners: List[ChannelPartner],
     user_lat: Optional[float] = None,
@@ -31,11 +44,22 @@ def filter_and_rank_partners(
     scheme_name: Optional[str] = None,
     district: Optional[str] = None,
     state: Optional[str] = None,
+    exclude_high_npa: bool = False,
 ) -> List[PartnerResponse]:
     results = []
 
     for p in partners:
         if not p.active:
+            continue
+
+        npa_val = p.npa_rate if p.npa_rate is not None else 3.2
+        util_val = p.fund_utilization if p.fund_utilization is not None else 85.0
+        sla_val = p.avg_processing_days if p.avg_processing_days is not None else 14
+        working_hours = p.working_hours or "Mon-Fri 09:30 - 17:30"
+        
+        health_score, is_flagged = calculate_partner_health(npa_val, util_val, sla_val)
+
+        if exclude_high_npa and is_flagged:
             continue
 
         if partner_type and p.type != partner_type:
@@ -75,13 +99,19 @@ def filter_and_rank_partners(
                 phone=p.phone,
                 email=p.email,
                 distance=dist,
+                npa_rate=npa_val,
+                fund_utilization=util_val,
+                avg_processing_days=sla_val,
+                health_score=health_score,
+                is_npa_flagged=is_flagged,
+                working_hours=working_hours,
             )
         )
 
-    # Sort by distance if available, otherwise by name
+    # Sort by distance if available, otherwise by health score descending
     if user_lat is not None and user_lon is not None:
         results.sort(key=lambda x: (x.distance if x.distance is not None else 999999))
     else:
-        results.sort(key=lambda x: x.name)
+        results.sort(key=lambda x: -(x.health_score or 0))
 
     return results

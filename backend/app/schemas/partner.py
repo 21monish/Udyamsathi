@@ -1,5 +1,6 @@
-from pydantic import BaseModel, Field
-from typing import Optional, List
+from pydantic import BaseModel, Field, field_serializer
+from typing import Optional, List, Union
+from uuid import UUID
 
 
 class PartnerCreate(BaseModel):
@@ -22,7 +23,7 @@ class PartnerCreate(BaseModel):
 
 
 class PartnerResponse(BaseModel):
-    id: str
+    id: Union[str, UUID]
     name: str
     type: str
     address: str
@@ -43,6 +44,10 @@ class PartnerResponse(BaseModel):
     health_score: Optional[float] = 88.0
     is_npa_flagged: Optional[bool] = False
     working_hours: Optional[str] = "Mon-Fri 09:30 - 17:30"
+
+    @field_serializer("id")
+    def serialize_id(self, v: Union[str, UUID]) -> str:
+        return str(v)
 
     class Config:
         from_attributes = True

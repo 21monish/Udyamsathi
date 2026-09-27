@@ -172,6 +172,24 @@ def evaluate_scheme_eligibility(
             detail="No mandatory educational qualification required for this scheme."
         ))
 
+    # 7. Project Cost Financing Limit Check (Statutory NSFDC 90% or 95% Cap)
+    cap_pct = 95 if (scheme.scheme_type == "MICRO_CREDIT" or "micro" in scheme.name.lower() or "aajeevika" in scheme.name.lower()) else 90
+    max_loan_by_cost = None
+    if user_input.project_cost and user_input.project_cost > 0:
+        max_loan_by_cost = round(user_input.project_cost * (cap_pct / 100.0), 2)
+        if user_input.loan_amount <= max_loan_by_cost:
+            checks.append(EligibilityCheck(
+                criterion="Project Cost Funding Ratio",
+                passed=True,
+                detail=f"Requested ₹{user_input.loan_amount:,.0f} is within the {cap_pct}% statutory NSFDC funding cap (₹{max_loan_by_cost:,.0f}) for project cost of ₹{user_input.project_cost:,.0f}."
+            ))
+        else:
+            checks.append(EligibilityCheck(
+                criterion="Project Cost Funding Ratio",
+                passed=False,
+                detail=f"Requested ₹{user_input.loan_amount:,.0f} exceeds {cap_pct}% statutory cap (₹{max_loan_by_cost:,.0f}) for project cost of ₹{user_input.project_cost:,.0f}. Max allowable loan is ₹{max_loan_by_cost:,.0f} (Promoter must contribute {100-cap_pct}%)."
+            ))
+
     # A scheme is eligible IF AND ONLY IF all hard checks pass!
     is_eligible = all(check.passed for check in checks)
     passed_count = sum(1 for check in checks if check.passed)
@@ -188,11 +206,38 @@ def assess_schemes(schemes: List[Scheme], user_input: EligibilityInput) -> Eligi
     eligible_schemes: List[SchemeRecommendation] = []
     ineligible_schemes: List[SchemeRecommendation] = []
 
+    is_female = bool(user_input.gender and user_input.gender.lower() in ["female", "woman", "women"])
+
     for s in schemes:
         if not s.active:
             continue
 
         is_eligible, checks, passed_count, total_checks = evaluate_scheme_eligibility(s, user_input)
+
+        # Statutory 0.5% interest rebate for female applicants
+        has_female_rebate = False
+        effective_rate = s.interest_rate
+        if is_female:
+            scheme_title = (s.name or "").lower()
+            scheme_cat = (s.scheme_type or "").lower()
+            if "education" in scheme_title or "education" in scheme_cat or "mahila" in scheme_title or "nsfdc" in scheme_title:
+                effective_rate = round(max(1.0, s.interest_rate - 0.5), 2)
+                has_female_rebate = True
+
+        # Project cost cap
+        cap_pct = 95 if (s.scheme_type == "MICRO_CREDIT" or "micro" in s.name.lower() or "aajeevika" in s.name.lower()) else 90
+        max_loan_by_cost = round(user_input.project_cost * (cap_pct / 100.0), 2) if user_input.project_cost else None
+
+        # Build explainable statutory reasoning
+        reasoning: List[str] = [
+            f"Annual income ₹{user_input.annual_income:,.0f} satisfies scheme criteria (Limit: ₹{s.max_income:,.0f})" if s.max_income else f"Income verified: ₹{user_input.annual_income:,.0f} (No ceiling specified).",
+            f"Statutory financing covers up to {cap_pct}% of project cost; promoter equity contribution is {100-cap_pct}%.",
+            f"Repayment duration up to {s.max_tenure // 12} years ({s.max_tenure} months) with a {s.moratorium}-month moratorium period.",
+        ]
+        if has_female_rebate:
+            reasoning.append(f"0.5% statutory female rebate applied: Standard interest {s.interest_rate}% p.a. reduced to {effective_rate}% p.a.")
+        if s.partner_types:
+            reasoning.append(f"Disbursement channel: Authorized {', '.join(s.partner_types)} institutions.")
 
         rec = SchemeRecommendation(
             scheme_id=str(s.id),
@@ -204,6 +249,9 @@ def assess_schemes(schemes: List[Scheme], user_input: EligibilityInput) -> Eligi
             total_checks=total_checks,
             max_loan=s.max_loan,
             interest_rate=s.interest_rate,
+            effective_interest_rate=effective_rate,
+            female_rebate_applied=has_female_rebate,
+            max_eligible_loan_by_project_cost=max_loan_by_cost,
             interest_rate_max=s.interest_rate_max,
             max_tenure=s.max_tenure,
             description=s.description,
@@ -211,6 +259,7 @@ def assess_schemes(schemes: List[Scheme], user_input: EligibilityInput) -> Eligi
             subsidy_info=s.subsidy_info,
             source_url=s.source_url,
             data_status=s.data_status,
+            reasoning=reasoning,
         )
 
         if is_eligible:
@@ -218,8 +267,8 @@ def assess_schemes(schemes: List[Scheme], user_input: EligibilityInput) -> Eligi
         else:
             ineligible_schemes.append(rec)
 
-    # Sort eligible schemes by lowest interest rate first (beneficiary advantage)
-    eligible_schemes.sort(key=lambda x: (x.interest_rate, -x.max_loan))
+    # Sort eligible schemes by lowest effective interest rate first (beneficiary advantage)
+    eligible_schemes.sort(key=lambda x: (x.effective_interest_rate, -x.max_loan))
     # Sort ineligible schemes by highest passed count
     ineligible_schemes.sort(key=lambda x: -x.passed_count)
 

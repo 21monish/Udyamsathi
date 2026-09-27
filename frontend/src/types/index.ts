@@ -9,6 +9,7 @@ export interface User {
   language: string;
   role: UserRole;
   location?: string;
+  is_active?: boolean;
   created_at: string;
 }
 
@@ -37,6 +38,7 @@ export interface ApplicantProfile {
   user_id: string;
   annual_income: number;
   category: 'SC' | 'ST' | 'OBC' | 'GENERAL';
+  gender?: 'male' | 'female' | 'other' | string;
   age: number;
   occupation: string;
   education_status: string;
@@ -83,6 +85,8 @@ export interface EligibilityInput {
   loan_amount: number;
   age: number;
   category: string;
+  gender?: string;
+  project_cost?: number;
   education_status: string;
   state: string;
   district: string;
@@ -104,6 +108,9 @@ export interface SchemeRecommendation {
   total_checks: number;
   max_loan: number;
   interest_rate: number;
+  effective_interest_rate?: number;
+  female_rebate_applied?: boolean;
+  max_eligible_loan_by_project_cost?: number;
   interest_rate_max?: number;
   max_tenure: number;
   description: string;
@@ -111,6 +118,7 @@ export interface SchemeRecommendation {
   subsidy_info?: string;
   source_url?: string;
   data_status: string;
+  reasoning?: string[];
 }
 
 export interface EligibilityResponse {
@@ -139,6 +147,12 @@ export interface ChannelPartner {
   phone?: string;
   email?: string;
   distance?: number;
+  npa_rate?: number;
+  fund_utilization?: number;
+  avg_processing_days?: number;
+  health_score?: number;
+  is_npa_flagged?: boolean;
+  working_hours?: string;
 }
 
 // EMI Calculator types

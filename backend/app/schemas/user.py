@@ -1,5 +1,6 @@
-from pydantic import BaseModel, EmailStr, Field
-from typing import Optional
+from pydantic import BaseModel, EmailStr, Field, field_serializer
+from typing import Optional, Union
+from uuid import UUID
 from datetime import datetime
 
 
@@ -17,14 +18,19 @@ class UserLogin(BaseModel):
 
 
 class UserResponse(BaseModel):
-    id: str
+    id: Union[str, UUID]
     name: str
     email: str
     mobile: Optional[str] = None
     language: str
     role: str
     location: Optional[str] = None
+    is_active: bool = True
     created_at: datetime
+
+    @field_serializer("id")
+    def serialize_id(self, v: Union[str, UUID]) -> str:
+        return str(v)
 
     class Config:
         from_attributes = True
@@ -39,6 +45,7 @@ class AuthResponse(BaseModel):
 class ProfileUpdate(BaseModel):
     annual_income: Optional[float] = None
     category: Optional[str] = None
+    gender: Optional[str] = None
     age: Optional[int] = None
     occupation: Optional[str] = None
     education_status: Optional[str] = None
@@ -54,6 +61,7 @@ class UserAdminCreate(BaseModel):
     role: str = "BENEFICIARY"
     mobile: Optional[str] = None
     language: Optional[str] = "en"
+    is_active: Optional[bool] = True
 
 
 class UserAdminUpdate(BaseModel):
@@ -62,3 +70,4 @@ class UserAdminUpdate(BaseModel):
     role: Optional[str] = None
     mobile: Optional[str] = None
     language: Optional[str] = None
+    is_active: Optional[bool] = None

@@ -11,8 +11,8 @@ class Application(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
-    scheme_id = Column(UUID(as_uuid=True), ForeignKey("schemes.id"), nullable=False)
-    partner_id = Column(UUID(as_uuid=True), ForeignKey("channel_partners.id"), nullable=True)
+    scheme_id = Column(UUID(as_uuid=True), ForeignKey("schemes.id", ondelete="CASCADE"), nullable=False)
+    partner_id = Column(UUID(as_uuid=True), ForeignKey("channel_partners.id", ondelete="SET NULL"), nullable=True)
     requested_amount = Column(Float, nullable=False)
     status = Column(String(20), default="DRAFT")  # DRAFT, SUBMITTED, UNDER_REVIEW, APPROVED, REJECTED
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))

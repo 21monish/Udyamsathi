@@ -53,6 +53,7 @@ def register(data: UserRegister, db: Session = Depends(get_db)):
             language=user.language,
             role=user.role.value,
             location=user.location,
+            is_active=user.is_active if user.is_active is not None else True,
             created_at=user.created_at,
         ),
     )
@@ -69,6 +70,12 @@ def login(data: UserLogin, db: Session = Depends(get_db)):
             detail="Invalid email or password",
         )
     
+    if not user.is_active:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Account is suspended. Please contact administrator.",
+        )
+    
     access_token = create_access_token(data={"sub": str(user.id)})
     
     return AuthResponse(
@@ -81,6 +88,7 @@ def login(data: UserLogin, db: Session = Depends(get_db)):
             language=user.language,
             role=user.role.value,
             location=user.location,
+            is_active=user.is_active if user.is_active is not None else True,
             created_at=user.created_at,
         ),
     )
@@ -99,6 +107,7 @@ def list_users(db: Session = Depends(get_db)):
             language=u.language,
             role=u.role.value,
             location=u.location,
+            is_active=u.is_active if u.is_active is not None else True,
             created_at=u.created_at,
         )
         for u in users
@@ -125,6 +134,7 @@ def admin_create_user(data: UserAdminCreate, db: Session = Depends(get_db)):
         mobile=data.mobile,
         language=data.language or "en",
         role=user_role,
+        is_active=data.is_active if data.is_active is not None else True,
     )
     db.add(user)
     db.flush()
@@ -140,6 +150,7 @@ def admin_create_user(data: UserAdminCreate, db: Session = Depends(get_db)):
         language=user.language,
         role=user.role.value,
         location=user.location,
+        is_active=user.is_active if user.is_active is not None else True,
         created_at=user.created_at,
     )
 
@@ -164,6 +175,8 @@ def admin_update_user(user_id: str, data: UserAdminUpdate, db: Session = Depends
             user.role = UserRole[data.role.upper()]
         except KeyError:
             pass
+    if data.is_active is not None:
+        user.is_active = data.is_active
             
     db.commit()
     db.refresh(user)
@@ -175,6 +188,7 @@ def admin_update_user(user_id: str, data: UserAdminUpdate, db: Session = Depends
         language=user.language,
         role=user.role.value,
         location=user.location,
+        is_active=user.is_active if user.is_active is not None else True,
         created_at=user.created_at,
     )
 

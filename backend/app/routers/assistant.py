@@ -45,6 +45,8 @@ def chat_with_assistant(
         loan_amount=float(extracted.get("loan_amount", 200000)),
         age=int(extracted.get("age", 30)),
         category=extracted.get("category", "SC"),
+        gender=extracted.get("gender", "male"),
+        project_cost=float(extracted.get("project_cost")) if extracted.get("project_cost") else None,
         education_status=extracted.get("education_status", "12th_standard"),
         state=extracted.get("state", "Gujarat"),
         district=extracted.get("district", "Ahmedabad"),

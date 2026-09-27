@@ -13,6 +13,7 @@ class ApplicantProfile(Base):
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), unique=True, nullable=False)
     annual_income = Column(Float, nullable=True)
     category = Column(String(20), nullable=True)  # SC, ST, OBC, GENERAL
+    gender = Column(String(20), default="male")  # male, female, other
     age = Column(Integer, nullable=True)
     occupation = Column(String(100), nullable=True)
     education_status = Column(String(100), nullable=True)

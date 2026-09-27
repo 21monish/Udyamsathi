@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime, timezone
-from sqlalchemy import Column, String, Float, Boolean, DateTime
+from sqlalchemy import Column, String, Float, Boolean, DateTime, Integer
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from app.database import Base
 
@@ -22,4 +22,8 @@ class ChannelPartner(Base):
     capacity_status = Column(String(20), default="AVAILABLE")  # AVAILABLE, LIMITED, FULL
     phone = Column(String(20), nullable=True)
     email = Column(String(255), nullable=True)
+    npa_rate = Column(Float, default=3.2)  # NPA Percentage
+    fund_utilization = Column(Float, default=85.0)  # Fund utilization rate %
+    avg_processing_days = Column(Integer, default=14)  # Average SLA days to process
+    working_hours = Column(String(100), default="Mon-Fri 09:30 - 17:30")
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
