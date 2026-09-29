@@ -22,13 +22,14 @@ if sys.platform == "win32":
 from app.utils.security import hash_password
 from scripts.seed_ai_knowledge import INITIAL_QA
 
-SUPABASE_URL = os.environ.get("SUPABASE_URL", "https://tysjojhasliytzmbspqe.supabase.co").rstrip("/")
-SERVICE_KEY = os.environ.get(
-    "SUPABASE_SERVICE_ROLE_KEY",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9."
-    "eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR5c2pvamhhc2xpeXR6bWJzcHFlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc5MDY1Njg0MCwiZXhwIjoyMTA2MjMyODQwfQ."
-    "Wwkat2LTSM4jj5kGD4Kju2IrnmX50axeKE54ieqX2aU"
-)
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "").rstrip("/")
+SERVICE_KEY = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
+
+if not SUPABASE_URL or not SERVICE_KEY:
+    raise RuntimeError(
+        "SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set. "
+        "Store them in GitHub Actions secrets for CI/CD."
+    )
 
 headers = {
     "apikey": SERVICE_KEY,

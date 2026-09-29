@@ -1,41 +1,53 @@
-name: Supabase Cloud Database & Storage Sync
+name: Validate backend and sync Supabase data
 
 on:
   push:
-    branches:
-      - master
-      - main
+    branches: [main, master]
     paths:
-      - 'backend/app/seed/data/**'
-      - 'backend/app/models/**'
-      - 'backend/scripts/**'
+      - 'backend/**'
       - '.github/workflows/supabase-sync.yml'
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: supabase-production-sync
+  cancel-in-progress: false
+
 jobs:
-  sync-database:
-    name: Sync Schemes & Database to Supabase
+  validate-and-sync:
+    name: Validate backend and sync production data
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: backend
     steps:
-      - name: Checkout Repository
+      - name: Check out source
         uses: actions/checkout@v4
-
-      - name: Setup Python 3.12
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-          cache: 'pip'
+          cache: pip
           cache-dependency-path: backend/requirements.txt
-
-      - name: Install Python Dependencies
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install httpx passlib bcrypt
-
-      - name: Execute Supabase Cloud Sync
-        env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL || 'https://tysjojhasliytzmbspqe.supabase.co' }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR5c2pvamhhc2xpeXR6bWJzcHFlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc5MDY1Njg0MCwiZXhwIjoyMTA2MjMyODQwfQ.Wwkat2LTSM4jj5kGD4Kju2IrnmX50axeKE54ieqX2aU' }}
+          python -m pip install -r requirements.txt
+      - name: Run backend validation
         run: |
-          python backend/scripts/sync_supabase_rest.py
+          python -m compileall -q app scripts
+          python -m tests.verify_all_models
+      - name: Verify Supabase configuration
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          test -n "$SUPABASE_URL" || { echo "Missing repository secret: SUPABASE_URL"; exit 1; }
+          test -n "$SUPABASE_SERVICE_ROLE_KEY" || { echo "Missing repository secret: SUPABASE_SERVICE_ROLE_KEY"; exit 1; }
+      - name: Sync production data to Supabase
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python scripts/sync_supabase_rest.py

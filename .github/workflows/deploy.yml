@@ -1,56 +1,71 @@
-name: Deploy Latest Website to Vercel
+name: Deploy frontend to Vercel
 
 on:
   push:
-    branches:
-      - master
-      - main
+    branches: [main, master]
     paths:
       - 'frontend/**'
       - '.github/workflows/deploy.yml'
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: vercel-production
+  cancel-in-progress: true
+
 jobs:
-  build-and-deploy:
+  test-build-deploy:
+    name: Test, build, and deploy
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./frontend
-
+        working-directory: frontend
     steps:
-      - name: Checkout Code
+      - name: Check out source
         uses: actions/checkout@v4
-
-      - name: Setup Node.js 20
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: 'npm'
+          node-version: 22
+          cache: npm
           cache-dependency-path: frontend/package-lock.json
-
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm ci
-
-      - name: Install Latest Vercel CLI
+      - name: Lint frontend
+        run: npm run lint
+        # Existing source warnings must not prevent an otherwise valid production release.
+        # Remove this once the legacy lint backlog is resolved to make lint a required gate.
+        continue-on-error: true
+      - name: Verify production build
+        run: npm run build
+      - name: Verify Vercel configuration
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          test -n "$VERCEL_TOKEN" || { echo "Missing repository secret: VERCEL_TOKEN"; exit 1; }
+          test -n "$VERCEL_ORG_ID" || { echo "Missing repository secret: VERCEL_ORG_ID"; exit 1; }
+          test -n "$VERCEL_PROJECT_ID" || { echo "Missing repository secret: VERCEL_PROJECT_ID"; exit 1; }
+      - name: Install Vercel CLI
         run: npm install --global vercel@latest
-
-      - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Pull Vercel production settings
+        run: vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
         env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-
-      - name: Build Project Artifacts
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build deployable artifact
+        run: vercel build --prod --token="$VERCEL_TOKEN"
         env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL || 'https://tysjojhasliytzmbspqe.supabase.co' }}
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR5c2pvamhhc2xpeXR6bWJzcHFlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA2NTY4NDAsImV4cCI6MjEwNjIzMjg0MH0.fe38fYq-Him-N1Y7LL2uqB2nDqqzLT8vTGfvqyFqWfU' }}
-          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL || 'http://localhost:8001/api/v1' }}
-
-      - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy to Vercel production
+        run: vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN"
         env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
