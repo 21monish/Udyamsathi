@@ -75,14 +75,15 @@ const stats = [
 
 export default function HomePage() {
   return (
-    <div className="overflow-hidden bg-[#f8faf7]">
+    <div className="page-enter overflow-hidden bg-[#f8faf7]">
       {/* Hero Section */}
       <section className="relative isolate overflow-hidden bg-[#073b35] text-white">
         <div className="absolute inset-0 opacity-20 [background-image:radial-gradient(#d9b454_1px,transparent_1px)] [background-size:22px_22px]" />
-        <div className="absolute -right-28 -top-40 h-[35rem] w-[35rem] rounded-full bg-[#16856e]/40 blur-3xl" />
+        <div className="hero-orb absolute -right-28 -top-40 h-[35rem] w-[35rem] rounded-full bg-[#16856e]/40 blur-3xl" />
+        <div className="hero-orb absolute -bottom-36 left-[20%] h-72 w-72 rounded-full bg-[#e8bd52]/15 blur-3xl [animation-delay:-4s]" />
 
         <div className="relative mx-auto grid w-[90%] max-w-[1700px] items-center gap-12 px-5 py-16 lg:grid-cols-[1.1fr_.9fr] lg:px-8 lg:py-24">
-          <div>
+          <div className="relative z-10">
             {/* Ministry Tag */}
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-[#f6da85]">
               <BadgeCheck className="h-4 w-4 text-[#f6da85]" />
@@ -104,7 +105,7 @@ export default function HomePage() {
             <div className="mt-8 flex flex-col gap-3.5 sm:flex-row">
               <Link
                 href="/eligibility"
-                className="inline-flex items-center justify-center gap-2.5 rounded-xl bg-[#e8bd52] px-6 py-4 font-bold text-[#17372f] shadow-lg shadow-black/10 transition hover:bg-[#f5d57f]"
+                className="inline-flex items-center justify-center gap-2.5 rounded-xl bg-[#e8bd52] px-6 py-4 font-bold text-[#17372f] shadow-lg shadow-black/10 transition duration-300 hover:-translate-y-0.5 hover:bg-[#f5d57f] hover:shadow-xl"
               >
                 <span>Check Eligibility (Free & Instant)</span>
                 <ArrowRight className="h-4 w-4" />
@@ -130,7 +131,7 @@ export default function HomePage() {
           </div>
 
           {/* Hero Visual Card */}
-          <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+          <div className="hero-card relative mx-auto w-full max-w-md lg:max-w-none">
             <div className="relative overflow-hidden rounded-[2.5rem] border border-white/20 bg-white/5 p-3.5 shadow-2xl backdrop-blur">
               <Image
                 src="/images/business.jpg"
@@ -181,7 +182,7 @@ export default function HomePage() {
             {pillars.map(({ icon: Icon, title, copy }, i) => (
               <div
                 key={title}
-                className="group relative rounded-3xl border border-slate-200 bg-slate-50/50 p-8 transition-all hover:-translate-y-1 hover:border-[#0d5c4e]/30 hover:bg-white hover:shadow-xl hover:shadow-emerald-950/5"
+                className="ui-card group relative rounded-3xl border border-slate-200 bg-slate-50/50 p-8 hover:border-[#0d5c4e]/30 hover:bg-white"
               >
                 <div className="flex items-center justify-between mb-6">
                   <div className="h-12 w-12 rounded-2xl bg-emerald-100 text-[#0d5c4e] flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -221,7 +222,7 @@ export default function HomePage() {
               <Link
                 href={sector.href}
                 key={sector.title}
-                className="group overflow-hidden rounded-3xl bg-white border border-slate-200 shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:border-emerald-300 flex flex-col"
+                className="ui-card group overflow-hidden rounded-3xl bg-white border border-slate-200 shadow-sm hover:border-emerald-300 flex flex-col"
               >
                 <div className="relative h-48 w-full overflow-hidden bg-slate-100">
                   <Image
@@ -299,7 +300,7 @@ export default function HomePage() {
                   desc: 'Locate authorized State Channelizing Agencies (SCAs) and Bank branches filtered to exclude those with high overdues.',
                 },
               ].map((s) => (
-                <div key={s.step} className="flex gap-4 p-4 rounded-2xl border border-slate-100 hover:border-slate-200 transition">
+                <div key={s.step} className="ui-card flex gap-4 p-4 rounded-2xl border border-slate-100 hover:border-slate-200 bg-white/70">
                   <div className="h-10 w-10 rounded-xl bg-emerald-50 text-[#0d5c4e] font-black text-sm flex items-center justify-center shrink-0">
                     {s.step}
                   </div>

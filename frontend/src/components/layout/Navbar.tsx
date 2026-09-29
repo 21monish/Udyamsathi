@@ -41,11 +41,11 @@ export default function Navbar() {
   const dashboardHref = user?.role === 'ADMIN' ? '/admin' : '/dashboard';
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-emerald-950/10 bg-white/90 shadow-[0_4px_20px_rgba(6,78,59,.04)] backdrop-blur-xl">
       <div className="mx-auto flex h-[72px] w-[90%] max-w-[1700px] items-center justify-between">
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-2.5">
-          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#0d5c4e] text-sm font-bold text-[#f4cf70] shadow-md shadow-emerald-950/10">
+        <Link href="/" className="group flex items-center gap-2.5">
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0d5c4e] to-[#073b35] text-sm font-bold text-[#f4cf70] shadow-md shadow-emerald-950/20 transition-transform duration-300 group-hover:rotate-3">
             US
           </div>
           <div>

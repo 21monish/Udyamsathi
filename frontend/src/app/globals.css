@@ -6,6 +6,9 @@
   --muted-foreground: #475569;
   --surface: #ffffff;
   --border: #cbd5e1;
+  --forest: #0d5c4e;
+  --forest-deep: #073b35;
+  --gold: #e8bd52;
   color-scheme: light;
 }
 
@@ -22,6 +25,50 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  background-image: linear-gradient(180deg, #ffffff 0%, #f8faf7 38%, #f2f7f3 100%);
+}
+
+/* A small shared motion system: expressive, but quiet enough for financial flows. */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float-soft {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -13px, 0); }
+}
+
+@keyframes glow-drift {
+  0%, 100% { transform: translate3d(-2%, -1%, 0) scale(1); opacity: .45; }
+  50% { transform: translate3d(3%, 3%, 0) scale(1.12); opacity: .72; }
+}
+
+.page-enter > * { animation: rise-in .65s cubic-bezier(.2,.8,.2,1) both; }
+.page-enter > *:nth-child(2) { animation-delay: .08s; }
+.page-enter > *:nth-child(3) { animation-delay: .16s; }
+.page-enter > *:nth-child(4) { animation-delay: .24s; }
+.page-enter > *:nth-child(5) { animation-delay: .32s; }
+.page-enter > *:nth-child(6) { animation-delay: .4s; }
+.hero-orb { animation: glow-drift 9s ease-in-out infinite; }
+.hero-card { animation: float-soft 6s ease-in-out infinite; }
+
+.ui-card {
+  transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease, border-color .25s ease;
+}
+
+.ui-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 40px rgba(6, 78, 59, .12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
 }
 
 .section-kicker { color: #0d5c4e; font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
