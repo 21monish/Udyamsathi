@@ -1,0 +1,41 @@
+name: Supabase Cloud Database & Storage Sync
+
+on:
+  push:
+    branches:
+      - master
+      - main
+    paths:
+      - 'backend/app/seed/data/**'
+      - 'backend/app/models/**'
+      - 'backend/scripts/**'
+      - '.github/workflows/supabase-sync.yml'
+  workflow_dispatch:
+
+jobs:
+  sync-database:
+    name: Sync Schemes & Database to Supabase
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install httpx passlib bcrypt
+
+      - name: Execute Supabase Cloud Sync
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL || 'https://tysjojhasliytzmbspqe.supabase.co' }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR5c2pvamhhc2xpeXR6bWJzcHFlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc5MDY1Njg0MCwiZXhwIjoyMTA2MjMyODQwfQ.Wwkat2LTSM4jj5kGD4Kju2IrnmX50axeKE54ieqX2aU' }}
+        run: |
+          python backend/scripts/sync_supabase_rest.py
