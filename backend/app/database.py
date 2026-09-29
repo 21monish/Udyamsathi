@@ -7,6 +7,10 @@ from app.config import get_settings
 settings = get_settings()
 
 db_url = settings.DATABASE_URL
+# Some hosting dashboards export pasted key/value pairs as one string. Accept
+# that form while keeping the canonical Render value as the URI alone.
+if db_url.startswith("DATABASE_URL="):
+    db_url = db_url.split("=", 1)[1].strip().strip('"').strip("'")
 if db_url.startswith("postgres://"):
     db_url = db_url.replace("postgres://", "postgresql://", 1)
 
