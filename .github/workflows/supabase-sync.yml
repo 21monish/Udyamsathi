@@ -35,6 +35,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
+          python -m pip check
+      - name: Verify runtime imports
+        run: python -c "from jose import jwt; import httpx; import sqlalchemy; print('Backend runtime dependencies are available')"
       - name: Run backend validation
         run: |
           python -m compileall -q app scripts
