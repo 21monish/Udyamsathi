@@ -55,6 +55,16 @@ const SCHEME_TYPES = [
 
 const SOCIAL_CATEGORIES = ['SC', 'ST', 'OBC', 'GENERAL', 'MINORITY'];
 const PURPOSE_OPTIONS = ['business', 'agriculture', 'vendors', 'artisans', 'education', 'healthcare', 'housing'];
+const STANDARD_DOCUMENTS = [
+  'Aadhaar Card',
+  'Caste Certificate',
+  'Bank Statement',
+  'Project Proposal',
+  'Income Certificate',
+  'Supplier Quotations',
+  'Passport Size Photo',
+  'Voter ID / Ration Card',
+];
 
 export default function AdminSchemesPage() {
   const [schemesList, setSchemesList] = useState<Scheme[]>([]);
@@ -68,6 +78,7 @@ export default function AdminSchemesPage() {
   const [editingScheme, setEditingScheme] = useState<Scheme | null>(null);
   const [deletingScheme, setDeletingScheme] = useState<Scheme | null>(null);
   const [formData, setFormData] = useState<SchemeFormData>(defaultFormData);
+  const [customDocInput, setCustomDocInput] = useState('');
   const [formSaving, setFormSaving] = useState(false);
   const [feedbackMsg, setFeedbackMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
@@ -94,11 +105,13 @@ export default function AdminSchemesPage() {
 
   const handleOpenAdd = () => {
     setFormData(defaultFormData);
+    setCustomDocInput('');
     setIsAddModalOpen(true);
   };
 
   const handleOpenEdit = (scheme: Scheme) => {
     setEditingScheme(scheme);
+    setCustomDocInput('');
     setFormData({
       name: scheme.name,
       scheme_type: scheme.scheme_type || 'TERM_LOAN',
@@ -117,6 +130,18 @@ export default function AdminSchemesPage() {
       subsidy_info: scheme.subsidy_info || '',
       active: scheme.active ?? true,
     });
+  };
+
+  const handleAddCustomDoc = () => {
+    const trimmed = customDocInput.trim();
+    if (!trimmed) return;
+    if (!formData.required_documents.some((d) => d.toLowerCase() === trimmed.toLowerCase())) {
+      setFormData({
+        ...formData,
+        required_documents: [...formData.required_documents, trimmed],
+      });
+    }
+    setCustomDocInput('');
   };
 
   const handleSaveScheme = async (e: React.FormEvent) => {
@@ -221,7 +246,7 @@ export default function AdminSchemesPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 py-8">
-      <div className="container mx-auto max-w-7xl px-4">
+      <div className="w-[90%] max-w-[1700px] mx-auto px-4">
         {/* Navigation Breadcrumb */}
         <div className="flex items-center gap-2 mb-4">
           <Link href="/admin" className="text-xs font-bold text-blue-700 hover:underline">
@@ -654,21 +679,120 @@ export default function AdminSchemesPage() {
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                    Required Documents (Comma separated)
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.required_documents.join(', ')}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        required_documents: e.target.value.split(',').map((s) => s.trim()).filter(Boolean),
-                      })
-                    }
-                    placeholder="Aadhaar, Caste Certificate, Bank Statement"
-                    className="w-full rounded-xl border border-slate-300 p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
-                  />
+                  <div className="flex items-center justify-between mb-2">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 uppercase">
+                        Required Documents
+                      </label>
+                      <p className="text-[11px] text-slate-500">
+                        Select mandatory documents required from the applicant for eligibility verification.
+                      </p>
+                    </div>
+                    <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800">
+                      {formData.required_documents.length} selected
+                    </span>
+                  </div>
+
+                  {/* Standard Document Checkboxes */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+                    {STANDARD_DOCUMENTS.map((doc) => {
+                      const isChecked = formData.required_documents.some(
+                        (d) => d.toLowerCase() === doc.toLowerCase()
+                      );
+                      return (
+                        <label
+                          key={doc}
+                          className={`flex items-center gap-2.5 p-2.5 rounded-xl border text-xs font-semibold cursor-pointer transition select-none ${
+                            isChecked
+                              ? 'bg-blue-50/80 border-blue-400 text-blue-900 shadow-sm'
+                              : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/60'
+                          }`}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={() => {
+                              let updated: string[];
+                              if (isChecked) {
+                                updated = formData.required_documents.filter(
+                                  (d) => d.toLowerCase() !== doc.toLowerCase()
+                                );
+                              } else {
+                                updated = [...formData.required_documents, doc];
+                              }
+                              setFormData({ ...formData, required_documents: updated });
+                            }}
+                            className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500 accent-blue-600 cursor-pointer"
+                          />
+                          <span className="flex-1">{doc}</span>
+                          {isChecked && (
+                            <span className="text-[10px] font-bold text-blue-600">✓ Added</span>
+                          )}
+                        </label>
+                      );
+                    })}
+                  </div>
+
+                  {/* Add Custom / Other Document */}
+                  <div className="mt-3 flex items-center gap-2">
+                    <input
+                      type="text"
+                      placeholder="Add other custom document (e.g. Trade License, Land Record)..."
+                      value={customDocInput}
+                      onChange={(e) => setCustomDocInput(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          e.preventDefault();
+                          handleAddCustomDoc();
+                        }
+                      }}
+                      className="flex-1 rounded-xl border border-slate-300 px-3.5 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleAddCustomDoc}
+                      className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition shadow-sm whitespace-nowrap"
+                    >
+                      + Add Custom
+                    </button>
+                  </div>
+
+                  {/* Active Selected Badges */}
+                  {formData.required_documents.length > 0 && (
+                    <div className="flex flex-wrap items-center gap-1.5 mt-3 pt-2 border-t border-slate-100">
+                      <span className="text-[10px] font-bold uppercase text-slate-400 mr-1">
+                        Active Checklist:
+                      </span>
+                      {formData.required_documents.map((doc, idx) => (
+                        <span
+                          key={idx}
+                          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-blue-100 text-blue-800 text-xs font-semibold border border-blue-200 shadow-xs"
+                        >
+                          <span>{doc}</span>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setFormData({
+                                ...formData,
+                                required_documents: formData.required_documents.filter((_, i) => i !== idx),
+                              });
+                            }}
+                            className="text-blue-500 hover:text-red-600 font-bold ml-0.5 text-xs transition"
+                            title="Remove document"
+                          >
+                            &times;
+                          </button>
+                        </span>
+                      ))}
+                      <button
+                        type="button"
+                        onClick={() => setFormData({ ...formData, required_documents: [] })}
+                        className="text-[11px] font-bold text-red-600 hover:underline ml-2"
+                      >
+                        Clear All
+                      </button>
+                    </div>
+                  )}
                 </div>
 
                 <div className="sm:col-span-2 flex items-center gap-3 pt-2">

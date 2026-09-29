@@ -91,7 +91,7 @@ function PartnersContent() {
 
   return (
     <div className="bg-gray-50 min-h-screen py-10">
-      <div className="container mx-auto px-4 max-w-6xl">
+      <div className="w-[90%] max-w-[1700px] mx-auto px-4">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>

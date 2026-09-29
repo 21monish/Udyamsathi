@@ -1,28 +1,348 @@
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, BadgeCheck, Calculator, Landmark, MapPin, ShieldCheck, Sparkles } from 'lucide-react';
+import {
+  ArrowRight,
+  BadgeCheck,
+  Calculator,
+  Landmark,
+  MapPin,
+  ShieldCheck,
+  Sparkles,
+  TrendingUp,
+  Percent,
+  Building2,
+  FileCheck2,
+  Users,
+  Compass,
+} from 'lucide-react';
 
 const sectors = [
-  { title: 'Agriculture & allied farming', image: '/images/agriculture.jpg', copy: 'Finance for equipment, dairy, irrigation and sustainable farm ventures.', tag: 'Agriculture', href: '/schemes?purpose=agriculture' },
-  { title: 'Small business & MSME', image: '/images/business.jpg', copy: 'Build, expand, or strengthen a manufacturing or service business.', tag: 'Business', href: '/schemes?purpose=business' },
-  { title: 'Street vendors', image: '/images/vendors.jpg', copy: 'Working-capital support for daily livelihood businesses.', tag: 'Micro-enterprise', href: '/schemes?search=svanidhi' },
-  { title: 'Artisans & craftspeople', image: '/images/artisans.jpg', copy: 'Credit and skill support for India’s traditional crafts.', tag: 'Artisans', href: '/schemes?search=vishwakarma' },
+  {
+    title: 'Agriculture & Allied Farming',
+    image: '/images/agriculture.jpg',
+    copy: 'Finance for dairy farming, irrigation pumps, tractors, and organic horticulture.',
+    tag: 'NSFDC Term Loan',
+    href: '/schemes?purpose=agriculture',
+  },
+  {
+    title: 'Small Business & MSME Units',
+    image: '/images/business.jpg',
+    copy: 'Capital for manufacturing, retail kirana stores, garment workshops, and repair centers.',
+    tag: 'Micro Finance (MFS)',
+    href: '/schemes?purpose=business',
+  },
+  {
+    title: 'Street Vendors & Micro Trade',
+    image: '/images/vendors.jpg',
+    copy: 'Working capital and equipment credit for daily urban and rural livelihood trades.',
+    tag: 'PM SVANidhi / Aajeevika',
+    href: '/schemes?search=svanidhi',
+  },
+  {
+    title: 'Traditional Artisans & Crafts',
+    image: '/images/artisans.jpg',
+    copy: 'Concessional loans, tool-kit incentives, and skill training for traditional craftspeople.',
+    tag: 'PM Vishwakarma',
+    href: '/schemes?search=vishwakarma',
+  },
 ];
-const services = [
-  { icon: Sparkles, title: 'Find your best fit', copy: 'A guided check matches your profile with relevant schemes.' },
-  { icon: Calculator, title: 'Plan before you apply', copy: 'See a clear EMI estimate, interest cost, and repayment picture.' },
-  { icon: MapPin, title: 'Reach the right partner', copy: 'Locate an authorised SCA, bank, RRB, or lending partner near you.' },
+
+const pillars = [
+  {
+    icon: Sparkles,
+    title: 'Deterministic Scheme Matching',
+    copy: 'Our statutory engine cross-checks family income, caste category, and project cost with 100% explainability.',
+  },
+  {
+    icon: Calculator,
+    title: 'EMI & Moratorium Simulator',
+    copy: 'Simulate monthly installments under reducing balance rules, with 3 to 12 months repayment holiday relief.',
+  },
+  {
+    icon: MapPin,
+    title: 'Geo-Spatial Partner Routing',
+    copy: 'Identify the closest State Channelizing Agency (SCA), Bank, or RRB branch filtered by solvent NPA health.',
+  },
 ];
-const steps = ['Share your goal and basic details', 'Review your eligible scheme matches', 'Estimate your repayment with the EMI tool', 'Connect with an authorised partner'];
+
+const stats = [
+  { val: '27+', label: 'Statutory Welfare Schemes', sub: 'NSFDC, MUDRA, PMEGP, Stand-Up' },
+  { val: '6.0%', label: 'Concessional Interest Rates', sub: 'Includes 0.5% female rebate' },
+  { val: '₹50 Lakh', label: 'Maximum Loan Assistance', sub: 'Up to 90% project cost' },
+  { val: '100+', label: 'Channel Partner Desks', sub: 'SCAs, PSBs & Regional Rural Banks' },
+];
 
 export default function HomePage() {
-  return <div className="overflow-hidden bg-[#f8faf7]">
-    <section className="relative isolate overflow-hidden bg-[#073b35] text-white"><div className="absolute inset-0 opacity-20 [background-image:radial-gradient(#d9b454_1px,transparent_1px)] [background-size:22px_22px]" /><div className="absolute -right-28 -top-40 h-[35rem] w-[35rem] rounded-full bg-[#16856e]/40 blur-3xl" />
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 lg:grid-cols-[1.05fr_.95fr] lg:px-8 lg:py-24"><div><div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-semibold tracking-wide text-[#f6da85]"><BadgeCheck className="h-4 w-4" /> A guided financial-access platform</div><h1 className="max-w-3xl text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">The right financial scheme, made easier to find.</h1><p className="mt-6 max-w-2xl text-lg leading-8 text-emerald-50/80">UdyamSathi helps entrepreneurs, farmers, vendors and artisans understand government credit support, calculate repayments, and find the right channel partner.</p><div className="mt-8 flex flex-col gap-3 sm:flex-row"><Link href="/eligibility" className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#e8bd52] px-5 py-3.5 font-semibold text-[#17372f] transition hover:bg-[#f5d57f]">Check eligibility <ArrowRight className="h-4 w-4" /></Link><Link href="/schemes" className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/30 px-5 py-3.5 font-semibold text-white transition hover:bg-white/10">Explore schemes</Link></div><div className="mt-10 grid max-w-xl grid-cols-3 gap-4 border-t border-white/15 pt-6">{[['Clear', 'eligibility checks'], ['Simple', 'repayment planning'], ['Local', 'partner discovery']].map(([strong, text]) => <p className="text-sm text-emerald-50/75" key={strong}><strong className="block text-base text-white">{strong}</strong>{text}</p>)}</div></div><div className="relative mx-auto w-full max-w-lg"><div className="relative overflow-hidden rounded-[2rem] border border-white/20 bg-white p-3 shadow-2xl shadow-black/30"><Image src="/images/business.jpg" alt="Entrepreneur working in a small business" width={900} height={700} priority className="h-[350px] w-full rounded-[1.4rem] object-cover sm:h-[430px]" /><div className="absolute bottom-8 left-8 right-8 rounded-2xl bg-white/95 p-4 text-slate-900 shadow-lg backdrop-blur"><div className="flex items-start gap-3"><div className="rounded-xl bg-emerald-100 p-2 text-emerald-800"><Sparkles className="h-5 w-5" /></div><div><p className="text-xs font-bold uppercase tracking-wider text-emerald-700">Your starting point</p><p className="mt-1 font-semibold">Tell us your goal. We’ll help you find the next step.</p></div></div></div></div></div></div>
-    </section>
-    <section className="bg-white py-16 lg:py-24"><div className="mx-auto max-w-7xl px-5 lg:px-8"><div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-end"><div><p className="section-kicker">A better route to support</p><h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Built around the decisions that matter.</h2></div><p className="max-w-2xl text-lg leading-8 text-slate-600">Move from uncertainty to a clear action plan — without needing to know every programme or lender in advance.</p></div><div className="mt-10 grid gap-5 md:grid-cols-3">{services.map(({ icon: Icon, title, copy }, i) => <article key={title} className="group rounded-2xl border border-slate-200 bg-[#fcfdfb] p-6 transition hover:-translate-y-1 hover:border-emerald-200 hover:shadow-xl hover:shadow-emerald-950/5"><div className="flex items-center justify-between"><div className="rounded-xl bg-emerald-100 p-3 text-emerald-800"><Icon className="h-6 w-6" /></div><span className="text-sm font-semibold text-slate-400">0{i + 1}</span></div><h3 className="mt-6 text-xl font-semibold text-slate-900">{title}</h3><p className="mt-2 leading-7 text-slate-600">{copy}</p></article>)}</div></div></section>
-    <section className="bg-[#eef5f0] py-16 lg:py-24"><div className="mx-auto max-w-7xl px-5 lg:px-8"><div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end"><div><p className="section-kicker">Support for every livelihood</p><h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Start with what you do.</h2></div><Link href="/schemes" className="inline-flex items-center gap-2 font-semibold text-emerald-800 hover:text-emerald-600">View all schemes <ArrowRight className="h-4 w-4" /></Link></div><div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{sectors.map((sector) => <Link href={sector.href} key={sector.title} className="group overflow-hidden rounded-2xl bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"><div className="relative h-48 overflow-hidden"><Image src={sector.image} alt={sector.title} fill sizes="(max-width: 1024px) 50vw, 25vw" className="object-cover transition duration-500 group-hover:scale-105"/><span className="absolute left-4 top-4 rounded-full bg-white/90 px-2.5 py-1 text-xs font-bold text-emerald-900 backdrop-blur">{sector.tag}</span></div><div className="p-5"><h3 className="text-lg font-semibold text-slate-900">{sector.title}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{sector.copy}</p><span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-emerald-700">Find support <ArrowRight className="h-4 w-4" /></span></div></Link>)}</div></div></section>
-    <section className="bg-white py-16 lg:py-24"><div className="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[.9fr_1.1fr] lg:px-8"><div className="rounded-3xl bg-[#123f37] p-8 text-white sm:p-10"><div className="w-fit rounded-xl bg-white/10 p-3"><Landmark className="h-6 w-6 text-[#e8bd52]" /></div><h2 className="mt-7 text-3xl font-semibold leading-tight">A clear path from question to application.</h2><p className="mt-4 leading-7 text-emerald-50/75">We turn complex scheme information into practical, understandable choices.</p><Link href="/application-guide" className="mt-8 inline-flex items-center gap-2 font-semibold text-[#f5d57f]">Read the application guide <ArrowRight className="h-4 w-4" /></Link></div><div className="grid content-center gap-5">{steps.map((step, i) => <div key={step} className="flex gap-4"><div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#e9f3ed] text-sm font-bold text-emerald-800">{i + 1}</div><div className="border-b border-slate-100 pb-5"><h3 className="font-semibold text-slate-900">{step}</h3><p className="mt-1 text-sm text-slate-600">{i === 0 ? 'No paperwork required to begin.' : i === 1 ? 'Get focused, understandable recommendations.' : i === 2 ? 'Know what you can comfortably afford.' : 'Prepare confidently for the next conversation.'}</p></div></div>)}</div></div></section>
-    <section className="px-5 pb-16 lg:pb-24"><div className="mx-auto max-w-7xl rounded-3xl bg-[#e8bd52] px-7 py-10 sm:px-12 sm:py-14"><div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between"><div><p className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-[#674f14]"><ShieldCheck className="h-4 w-4" /> Start with clarity</p><h2 className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight text-[#193830] sm:text-4xl">Find the support that fits your ambition.</h2></div><Link href="/eligibility" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-[#133c34] px-5 py-3.5 font-semibold text-white transition hover:bg-[#0a2c26]">Start eligibility check <ArrowRight className="h-4 w-4" /></Link></div></div></section>
-  </div>;
+  return (
+    <div className="overflow-hidden bg-[#f8faf7]">
+      {/* Hero Section */}
+      <section className="relative isolate overflow-hidden bg-[#073b35] text-white">
+        <div className="absolute inset-0 opacity-20 [background-image:radial-gradient(#d9b454_1px,transparent_1px)] [background-size:22px_22px]" />
+        <div className="absolute -right-28 -top-40 h-[35rem] w-[35rem] rounded-full bg-[#16856e]/40 blur-3xl" />
+
+        <div className="relative mx-auto grid w-[90%] max-w-[1700px] items-center gap-12 px-5 py-16 lg:grid-cols-[1.1fr_.9fr] lg:px-8 lg:py-24">
+          <div>
+            {/* Ministry Tag */}
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-[#f6da85]">
+              <BadgeCheck className="h-4 w-4 text-[#f6da85]" />
+              <span>SIH26092 &bull; NSFDC Credit Access Portal</span>
+            </div>
+
+            <h1 className="max-w-3xl text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl text-white">
+              The right government credit scheme,{' '}
+              <span className="text-[#f6da85]">made simple and transparent.</span>
+            </h1>
+
+            <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-emerald-50/85">
+              UdyamSathi bridges the discovery and operational gap for Scheduled Caste entrepreneurs and artisans.
+              Check statutory eligibility, calculate repayment with moratorium holidays, and locate your authorized
+              State Channelizing Agency in minutes.
+            </p>
+
+            {/* Main Action CTAs */}
+            <div className="mt-8 flex flex-col gap-3.5 sm:flex-row">
+              <Link
+                href="/eligibility"
+                className="inline-flex items-center justify-center gap-2.5 rounded-xl bg-[#e8bd52] px-6 py-4 font-bold text-[#17372f] shadow-lg shadow-black/10 transition hover:bg-[#f5d57f]"
+              >
+                <span>Check Eligibility (Free & Instant)</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="/schemes"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/30 px-6 py-4 font-semibold text-white transition hover:bg-white/10"
+              >
+                <span>Explore 27+ Schemes</span>
+              </Link>
+            </div>
+
+            {/* Quick Metrics Banner */}
+            <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-white/15 pt-8">
+              {stats.map((s) => (
+                <div key={s.label}>
+                  <p className="text-2xl sm:text-3xl font-black text-[#f6da85]">{s.val}</p>
+                  <p className="text-xs font-bold text-white mt-0.5">{s.label}</p>
+                  <p className="text-[10px] text-emerald-100/70 mt-0.5">{s.sub}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Hero Visual Card */}
+          <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+            <div className="relative overflow-hidden rounded-[2.5rem] border border-white/20 bg-white/5 p-3.5 shadow-2xl backdrop-blur">
+              <Image
+                src="/images/business.jpg"
+                alt="Entrepreneur in India working in enterprise unit"
+                width={800}
+                height={600}
+                priority
+                className="h-[360px] w-full rounded-[2rem] object-cover sm:h-[440px]"
+              />
+
+              {/* Floating Floating Stat Badge */}
+              <div className="absolute bottom-7 left-7 right-7 rounded-2xl bg-white/95 p-4 text-slate-900 shadow-xl backdrop-blur border border-slate-100">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-xl bg-emerald-100 flex items-center justify-center text-[#0d5c4e] shrink-0">
+                    <ShieldCheck className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-emerald-700">
+                      Zero Bureaucratic Ambiguity
+                    </p>
+                    <p className="text-xs font-bold text-slate-800 mt-0.5">
+                      Deterministic government statutory rules. No hidden interest rates or surprise exclusions.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3 Core Pillars Section */}
+      <section className="bg-white py-16 lg:py-24 border-b border-slate-100">
+        <div className="w-[90%] max-w-[1700px] mx-auto px-5 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <p className="text-xs font-bold uppercase tracking-widest text-[#0d5c4e]">
+              A Unified Digital Channel Finance Bridge
+            </p>
+            <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+              Solving the Awareness, Discovery, and Operational Gap
+            </h2>
+            <p className="mt-3 text-sm sm:text-base text-slate-600">
+              Transforming the fragmented channel partner system into a transparent, guided journey for beneficiaries.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {pillars.map(({ icon: Icon, title, copy }, i) => (
+              <div
+                key={title}
+                className="group relative rounded-3xl border border-slate-200 bg-slate-50/50 p-8 transition-all hover:-translate-y-1 hover:border-[#0d5c4e]/30 hover:bg-white hover:shadow-xl hover:shadow-emerald-950/5"
+              >
+                <div className="flex items-center justify-between mb-6">
+                  <div className="h-12 w-12 rounded-2xl bg-emerald-100 text-[#0d5c4e] flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <span className="text-xs font-black text-slate-300">0{i + 1}</span>
+                </div>
+                <h3 className="text-lg font-bold text-slate-900">{title}</h3>
+                <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600">{copy}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Sectors & Livelihoods */}
+      <section className="bg-[#eef5f0] py-16 lg:py-24">
+        <div className="w-[90%] max-w-[1700px] mx-auto px-5 lg:px-8">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-widest text-[#0d5c4e]">Target Beneficiaries</p>
+              <h2 className="mt-1 text-3xl font-extrabold tracking-tight text-slate-900">
+                Support Tailored for Every Livelihood
+              </h2>
+            </div>
+            <Link
+              href="/schemes"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0d5c4e] hover:underline"
+            >
+              <span>View All 27 Schemes</span>
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {sectors.map((sector) => (
+              <Link
+                href={sector.href}
+                key={sector.title}
+                className="group overflow-hidden rounded-3xl bg-white border border-slate-200 shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:border-emerald-300 flex flex-col"
+              >
+                <div className="relative h-48 w-full overflow-hidden bg-slate-100">
+                  <Image
+                    src={sector.image}
+                    alt={sector.title}
+                    fill
+                    sizes="(max-width: 1024px) 50vw, 25vw"
+                    className="object-cover transition duration-500 group-hover:scale-105"
+                  />
+                  <span className="absolute left-3.5 top-3.5 rounded-full bg-white/95 px-3 py-1 text-[11px] font-bold text-emerald-900 shadow-sm backdrop-blur">
+                    {sector.tag}
+                  </span>
+                </div>
+                <div className="p-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-base font-bold text-slate-900 group-hover:text-[#0d5c4e] transition-colors">
+                      {sector.title}
+                    </h3>
+                    <p className="mt-1.5 text-xs leading-relaxed text-slate-500">{sector.copy}</p>
+                  </div>
+                  <span className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-[#0d5c4e]">
+                    <span>Check Options</span>
+                    <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4-Step Pathway Section */}
+      <section className="bg-white py-16 lg:py-24">
+        <div className="w-[90%] max-w-[1700px] mx-auto px-5 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-12 items-center">
+            <div className="lg:col-span-5 rounded-3xl bg-[#0d5c4e] p-8 sm:p-10 text-white shadow-xl">
+              <div className="h-12 w-12 rounded-2xl bg-white/10 flex items-center justify-center text-[#f4cf70] mb-6">
+                <Landmark className="h-6 w-6" />
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-extrabold leading-tight">
+                From Enquiry to Authorized Branch in 4 Simple Steps.
+              </h2>
+              <p className="mt-4 text-xs sm:text-sm leading-relaxed text-emerald-100">
+                Eliminate repeated bank visits and application rejections by knowing your scheme fit and checklist in advance.
+              </p>
+              <Link
+                href="/application-guide"
+                className="mt-8 inline-flex items-center gap-2 rounded-xl bg-[#e8bd52] px-5 py-3 text-xs font-bold text-[#17372f] hover:bg-[#f5d57f] transition shadow-md"
+              >
+                <span>Read Full Application Guide</span>
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+
+            <div className="lg:col-span-7 space-y-6">
+              {[
+                {
+                  step: '01',
+                  title: 'Complete 60-Second Questionnaire',
+                  desc: 'Input annual family income (up to ₹5L), proposed loan amount, and social category without uploading documents.',
+                },
+                {
+                  step: '02',
+                  title: 'Receive Explainable Scheme Recommendations',
+                  desc: 'See exactly why you qualify, statutory interest rate (including 0.5% female rebate), and maximum eligible funding.',
+                },
+                {
+                  step: '03',
+                  title: 'Simulate EMI with Repayment Holiday',
+                  desc: 'Model reducing balance monthly installments with 3 to 12 months moratorium period where principal repayment is deferred.',
+                },
+                {
+                  step: '04',
+                  title: 'Route to Nearest Solvent Channel Partner',
+                  desc: 'Locate authorized State Channelizing Agencies (SCAs) and Bank branches filtered to exclude those with high overdues.',
+                },
+              ].map((s) => (
+                <div key={s.step} className="flex gap-4 p-4 rounded-2xl border border-slate-100 hover:border-slate-200 transition">
+                  <div className="h-10 w-10 rounded-xl bg-emerald-50 text-[#0d5c4e] font-black text-sm flex items-center justify-center shrink-0">
+                    {s.step}
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-slate-900">{s.title}</h3>
+                    <p className="mt-1 text-xs text-slate-500 leading-relaxed">{s.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Bottom CTA Banner */}
+      <section className="px-5 pb-16 lg:pb-24">
+        <div className="w-[90%] max-w-[1700px] mx-auto rounded-3xl bg-gradient-to-r from-[#e8bd52] via-[#f4cf70] to-[#f6da85] p-8 sm:p-12 shadow-md">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-wider text-[#4d3807] flex items-center gap-1.5">
+                <ShieldCheck className="h-4 w-4" />
+                <span>Government of India Concessional Credit</span>
+              </p>
+              <h2 className="mt-1 text-2xl sm:text-3xl font-extrabold text-[#17372f]">
+                Ready to find the right loan for your enterprise?
+              </h2>
+              <p className="text-xs sm:text-sm text-[#4d3807] mt-1 max-w-xl">
+                Free, instant, and completely deterministic. No broker fee, no guesswork.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <Link
+                href="/eligibility"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#0d5c4e] px-6 py-3.5 text-xs sm:text-sm font-bold text-white hover:bg-[#094237] transition shadow-md"
+              >
+                <span>Start Free Check</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 }

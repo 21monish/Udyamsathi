@@ -5,10 +5,19 @@ from app.config import get_settings
 
 settings = get_settings()
 
+db_url = settings.DATABASE_URL
+if db_url.startswith("postgres://"):
+    db_url = db_url.replace("postgres://", "postgresql://", 1)
+
 engine_options = {"pool_pre_ping": True}
-if settings.DATABASE_URL.startswith("sqlite"):
+if db_url.startswith("sqlite"):
     engine_options["connect_args"] = {"check_same_thread": False}
-engine = create_engine(settings.DATABASE_URL, **engine_options)
+else:
+    engine_options["pool_recycle"] = 300
+    engine_options["pool_size"] = 10
+    engine_options["max_overflow"] = 20
+
+engine = create_engine(db_url, **engine_options)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 

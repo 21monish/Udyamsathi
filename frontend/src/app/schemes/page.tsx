@@ -40,11 +40,13 @@ export default function SchemesPage() {
   const purposes = [
     { id: 'ALL', label: 'All Categories' },
     { id: 'business', label: '💼 Business & MSME' },
+    { id: 'vendors', label: '🛒 Street Vendors & Trade' },
+    { id: 'artisans', label: '🛠️ Artisans & Crafts' },
+    { id: 'agriculture', label: '🌾 Agriculture & Fisheries' },
+    { id: 'education', label: '🎓 Education & Scholarships' },
     { id: 'healthcare', label: '🏥 Healthcare' },
     { id: 'social_security', label: '🛡️ Social Security & Pension' },
     { id: 'housing', label: '🏠 Housing & Solar' },
-    { id: 'agriculture', label: '🌾 Agriculture' },
-    { id: 'education', label: '🎓 Education' },
   ];
 
   const categories = [
@@ -76,7 +78,7 @@ export default function SchemesPage() {
 
   return (
     <div className="bg-gray-50 min-h-screen py-10">
-      <div className="container mx-auto px-4">
+      <div className="w-[90%] max-w-[1700px] mx-auto">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-2 text-sm text-blue-600 font-semibold mb-2">

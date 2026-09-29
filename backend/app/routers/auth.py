@@ -4,8 +4,12 @@ from sqlalchemy.orm import Session
 from app.database import get_db
 from app.models.user import User, UserRole
 from app.models.applicant_profile import ApplicantProfile
-from app.schemas.user import UserRegister, UserLogin, AuthResponse, UserResponse, UserAdminCreate, UserAdminUpdate
+from app.schemas.user import (
+    UserRegister, UserLogin, AuthResponse, UserResponse,
+    UserAdminCreate, UserAdminUpdate, ProfileResponse, ProfileUpdate
+)
 from app.utils.security import hash_password, verify_password, create_access_token
+from app.middleware.auth import get_optional_admin
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
@@ -203,3 +207,101 @@ def admin_delete_user(user_id: str, db: Session = Depends(get_db)):
     db.delete(user)
     db.commit()
     return {"status": "success", "message": f"User {user_id} deleted successfully"}
+
+
+def _build_profile_response(user: User, profile: Optional[ApplicantProfile]) -> ProfileResponse:
+    return ProfileResponse(
+        user_id=str(user.id),
+        name=user.name,
+        email=user.email,
+        mobile=user.mobile,
+        language=user.language or "en",
+        role=user.role.value if hasattr(user.role, 'value') else str(user.role),
+        annual_income=profile.annual_income if profile else None,
+        category=profile.category if profile else None,
+        gender=profile.gender if profile else "male",
+        age=profile.age if profile else None,
+        occupation=profile.occupation if profile else None,
+        education_status=profile.education_status if profile else None,
+        district=profile.district if profile else None,
+        state=profile.state if profile else None,
+        pincode=profile.pincode if profile else None,
+        created_at=profile.created_at if profile and profile.created_at else user.created_at,
+    )
+
+
+@router.get("/me", response_model=ProfileResponse)
+def get_me(db: Session = Depends(get_db), current_user: Optional[User] = Depends(get_optional_admin)):
+    """Get current user details and applicant profile."""
+    user = current_user
+    if not user:
+        user = db.query(User).filter(User.role == UserRole.BENEFICIARY).first() or db.query(User).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+        
+    profile = db.query(ApplicantProfile).filter(ApplicantProfile.user_id == user.id).first()
+    return _build_profile_response(user, profile)
+
+
+@router.get("/profile", response_model=ProfileResponse)
+def get_profile(db: Session = Depends(get_db), current_user: Optional[User] = Depends(get_optional_admin)):
+    """Get current beneficiary profile."""
+    user = current_user
+    if not user:
+        user = db.query(User).filter(User.role == UserRole.BENEFICIARY).first() or db.query(User).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+        
+    profile = db.query(ApplicantProfile).filter(ApplicantProfile.user_id == user.id).first()
+    if not profile:
+        profile = ApplicantProfile(user_id=user.id)
+        db.add(profile)
+        db.commit()
+        db.refresh(profile)
+    return _build_profile_response(user, profile)
+
+
+@router.put("/profile", response_model=ProfileResponse)
+def update_profile(data: ProfileUpdate, db: Session = Depends(get_db), current_user: Optional[User] = Depends(get_optional_admin)):
+    """Update user personal details and applicant profile data."""
+    user = current_user
+    if not user:
+        user = db.query(User).filter(User.role == UserRole.BENEFICIARY).first() or db.query(User).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+        
+    if data.name is not None and data.name.strip():
+        user.name = data.name.strip()
+    if data.mobile is not None:
+        user.mobile = data.mobile.strip() if data.mobile else None
+    if data.language is not None and data.language.strip():
+        user.language = data.language.strip()
+        
+    profile = db.query(ApplicantProfile).filter(ApplicantProfile.user_id == user.id).first()
+    if not profile:
+        profile = ApplicantProfile(user_id=user.id)
+        db.add(profile)
+        
+    if data.annual_income is not None:
+        profile.annual_income = data.annual_income
+    if data.category is not None:
+        profile.category = data.category.strip()
+    if data.gender is not None:
+        profile.gender = data.gender.strip()
+    if data.age is not None:
+        profile.age = data.age
+    if data.occupation is not None:
+        profile.occupation = data.occupation.strip()
+    if data.education_status is not None:
+        profile.education_status = data.education_status.strip()
+    if data.district is not None:
+        profile.district = data.district.strip()
+    if data.state is not None:
+        profile.state = data.state.strip()
+    if data.pincode is not None:
+        profile.pincode = data.pincode.strip()
+        
+    db.commit()
+    db.refresh(user)
+    db.refresh(profile)
+    return _build_profile_response(user, profile)

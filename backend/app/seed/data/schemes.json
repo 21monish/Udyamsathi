@@ -1,26 +1,457 @@
 [
   {
+    "name": "NSKFDC General Term Loan",
+    "scheme_type": "TERM_LOAN",
+    "description": "Term loan for Safai Karamcharis and their dependents for income-generating activities. Loan up to ₹15 lakh with concessional interest.",
+    "min_income": null,
+    "max_income": 300000.0,
+    "min_loan": 10000.0,
+    "max_loan": 1500000.0,
+    "interest_rate": 6.0,
+    "interest_rate_max": 9.0,
+    "max_tenure": 120,
+    "moratorium": 6,
+    "eligible_purposes": [
+      "business",
+      "micro_enterprise",
+      "self_employment"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST",
+      "OBC",
+      "GENERAL"
+    ],
+    "min_age": 18,
+    "max_age": 55,
+    "min_education": null,
+    "required_documents": [
+      "Safai Karamchari Certificate",
+      "Income Certificate",
+      "Identity Proof (Aadhaar)",
+      "Address Proof",
+      "Bank Account Details",
+      "Project Report"
+    ],
+    "subsidy_info": "1% interest rebate for women beneficiaries. 0.5% rebate for timely repayment.",
+    "partner_types": [
+      "SCA",
+      "PSB"
+    ],
+    "source_url": "https://nskfdc.nic.in",
+    "data_status": "DEMO",
+    "active": true
+  },
+  {
+    "name": "Stand-Up India",
+    "scheme_type": "TERM_LOAN",
+    "description": "Bank loans between ₹10 lakh and ₹1 crore for SC/ST and Women entrepreneurs to set up greenfield enterprises in manufacturing, services, or trading.",
+    "min_income": null,
+    "max_income": null,
+    "min_loan": 1000000.0,
+    "max_loan": 10000000.0,
+    "interest_rate": 9.0,
+    "interest_rate_max": 12.0,
+    "max_tenure": 84,
+    "moratorium": 18,
+    "eligible_purposes": [
+      "business",
+      "micro_enterprise"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST"
+    ],
+    "min_age": 18,
+    "max_age": null,
+    "min_education": null,
+    "required_documents": [
+      "SC/ST Certificate",
+      "Identity Proof (Aadhaar)",
+      "Address Proof",
+      "Business Plan/Project Report",
+      "Bank Account Details",
+      "Proof of Business Address",
+      "ITR (if available)"
+    ],
+    "subsidy_info": "No subsidy. Margin money of up to 25% can be from eligible central/state schemes.",
+    "partner_types": [
+      "PSB",
+      "RRB"
+    ],
+    "source_url": "https://www.standupmitra.in",
+    "data_status": "DEMO",
+    "active": true
+  },
+  {
+    "name": "MUDRA Shishu",
+    "scheme_type": "MUDRA",
+    "description": "Micro-finance for very small businesses. Loan up to ₹50,000 under Pradhan Mantri MUDRA Yojana for income-generating activities.",
+    "min_income": null,
+    "max_income": null,
+    "min_loan": 1000.0,
+    "max_loan": 50000.0,
+    "interest_rate": 10.0,
+    "interest_rate_max": 12.0,
+    "max_tenure": 60,
+    "moratorium": 0,
+    "eligible_purposes": [
+      "business",
+      "micro_enterprise",
+      "self_employment"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST",
+      "OBC",
+      "GENERAL"
+    ],
+    "min_age": 18,
+    "max_age": null,
+    "min_education": null,
+    "required_documents": [
+      "Identity Proof (Aadhaar)",
+      "Address Proof",
+      "Business Proof/Activity Details",
+      "Bank Account Details",
+      "Passport Photo"
+    ],
+    "subsidy_info": null,
+    "partner_types": [
+      "PSB",
+      "RRB",
+      "NBFC_MFI"
+    ],
+    "source_url": "https://www.mudra.org.in",
+    "data_status": "DEMO",
+    "active": true
+  },
+  {
+    "name": "MUDRA Kishore",
+    "scheme_type": "MUDRA",
+    "description": "Loans from ₹50,000 to ₹5 lakh for growing businesses under Pradhan Mantri MUDRA Yojana.",
+    "min_income": null,
+    "max_income": null,
+    "min_loan": 50001.0,
+    "max_loan": 500000.0,
+    "interest_rate": 10.0,
+    "interest_rate_max": 14.0,
+    "max_tenure": 60,
+    "moratorium": 0,
+    "eligible_purposes": [
+      "business",
+      "micro_enterprise",
+      "self_employment"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST",
+      "OBC",
+      "GENERAL"
+    ],
+    "min_age": 18,
+    "max_age": null,
+    "min_education": null,
+    "required_documents": [
+      "Identity Proof (Aadhaar)",
+      "Address Proof",
+      "Business Registration (if any)",
+      "Bank Statements (6 months)",
+      "Business Plan",
+      "Passport Photo"
+    ],
+    "subsidy_info": null,
+    "partner_types": [
+      "PSB",
+      "RRB",
+      "NBFC_MFI"
+    ],
+    "source_url": "https://www.mudra.org.in",
+    "data_status": "DEMO",
+    "active": true
+  },
+  {
+    "name": "MUDRA Tarun",
+    "scheme_type": "MUDRA",
+    "description": "Loans from ₹5 lakh to ₹10 lakh for established businesses seeking expansion under Pradhan Mantri MUDRA Yojana.",
+    "min_income": null,
+    "max_income": null,
+    "min_loan": 500001.0,
+    "max_loan": 1000000.0,
+    "interest_rate": 11.0,
+    "interest_rate_max": 16.0,
+    "max_tenure": 84,
+    "moratorium": 0,
+    "eligible_purposes": [
+      "business",
+      "micro_enterprise"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST",
+      "OBC",
+      "GENERAL"
+    ],
+    "min_age": 18,
+    "max_age": null,
+    "min_education": null,
+    "required_documents": [
+      "Identity Proof (Aadhaar)",
+      "Address Proof",
+      "Business Registration",
+      "Bank Statements (12 months)",
+      "ITR (2 years)",
+      "Business Plan",
+      "Proof of Business Address"
+    ],
+    "subsidy_info": null,
+    "partner_types": [
+      "PSB",
+      "RRB"
+    ],
+    "source_url": "https://www.mudra.org.in",
+    "data_status": "DEMO",
+    "active": true
+  },
+  {
+    "name": "PMEGP",
+    "scheme_type": "PMEGP",
+    "description": "Prime Minister's Employment Generation Programme. Loans for new micro-enterprises in manufacturing (up to ₹50 lakh) or service/business (up to ₹20 lakh) with government subsidy on project cost.",
+    "min_income": null,
+    "max_income": null,
+    "min_loan": 100000.0,
+    "max_loan": 5000000.0,
+    "interest_rate": 10.0,
+    "interest_rate_max": 14.0,
+    "max_tenure": 84,
+    "moratorium": 6,
+    "eligible_purposes": [
+      "business",
+      "micro_enterprise"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST",
+      "OBC",
+      "GENERAL"
+    ],
+    "min_age": 18,
+    "max_age": null,
+    "min_education": "8th_standard",
+    "required_documents": [
+      "Identity Proof (Aadhaar)",
+      "Address Proof",
+      "Caste Certificate (for SC/ST/OBC)",
+      "Education Certificate",
+      "Project Report",
+      "Passport Photo",
+      "Bank Account Details",
+      "EDP Training Certificate"
+    ],
+    "subsidy_info": "SC/ST category: 35% subsidy on project cost in urban areas, 35% in rural areas. General category: 15% urban, 25% rural. Projects above ₹10L (manufacturing) or ₹5L (service) require 8th standard education.",
+    "partner_types": [
+      "PSB",
+      "RRB"
+    ],
+    "source_url": "https://www.kviconline.gov.in/pmegpeportal/",
+    "data_status": "DEMO",
+    "active": true
+  },
+  {
+    "name": "Venture Capital Fund for SC",
+    "scheme_type": "VENTURE_CAPITAL",
+    "description": "Equity or quasi-equity funding for SC entrepreneurs with viable business plans. For projects requiring ₹50 lakh to ₹15 crore. Operated through NSFDC.",
+    "min_income": null,
+    "max_income": 500000.0,
+    "min_loan": 5000000.0,
+    "max_loan": 150000000.0,
+    "interest_rate": 0.0,
+    "interest_rate_max": null,
+    "max_tenure": 0,
+    "moratorium": 0,
+    "eligible_purposes": [
+      "business"
+    ],
+    "eligible_categories": [
+      "SC"
+    ],
+    "min_age": 18,
+    "max_age": null,
+    "min_education": null,
+    "required_documents": [
+      "SC Certificate",
+      "Income Certificate",
+      "Identity Proof (Aadhaar)",
+      "Detailed Business Plan",
+      "Financial Projections",
+      "Bank Statements",
+      "Company Registration (if applicable)"
+    ],
+    "subsidy_info": "Equity investment — no interest. Returns through business growth and exit.",
+    "partner_types": [
+      "SCA"
+    ],
+    "source_url": "https://nsfdc.nic.in",
+    "data_status": "DEMO",
+    "active": true
+  },
+  {
+    "name": "NSFDC Education Loan",
+    "scheme_type": "EDUCATION_LOAN",
+    "description": "Concessional education loan for SC students pursuing professional and technical higher education in India or abroad. Up to ₹40 Lakh at 6.5% interest.",
+    "min_income": null,
+    "max_income": 500000.0,
+    "min_loan": 50000.0,
+    "max_loan": 4000000.0,
+    "interest_rate": 6.5,
+    "interest_rate_max": null,
+    "max_tenure": 84,
+    "moratorium": 12,
+    "eligible_purposes": [
+      "education"
+    ],
+    "eligible_categories": [
+      "SC"
+    ],
+    "min_age": 17,
+    "max_age": 35,
+    "min_education": "12th_standard",
+    "required_documents": [
+      "SC Certificate",
+      "Income Certificate",
+      "Identity Proof (Aadhaar)",
+      "Admission Letter",
+      "Fee Structure",
+      "Mark Sheets",
+      "Bank Account Details"
+    ],
+    "subsidy_info": "Concessional 6.5% interest rate. Moratorium period covers course duration plus 6 months.",
+    "partner_types": [
+      "SCA",
+      "PSB"
+    ],
+    "source_url": "https://nsfdc.nic.in",
+    "data_status": "VERIFIED",
+    "active": true
+  },
+  {
+    "name": "NSFDC Term Loan",
+    "scheme_type": "TERM_LOAN",
+    "description": "Concessional term loan for income-generating activities exclusively for Scheduled Caste entrepreneurs. Financing projects costing up to ₹50 Lakh through State Channelizing Agencies.",
+    "min_income": null,
+    "max_income": 500000.0,
+    "min_loan": 140001.0,
+    "max_loan": 4500000.0,
+    "interest_rate": 8.0,
+    "interest_rate_max": null,
+    "max_tenure": 120,
+    "moratorium": 6,
+    "eligible_purposes": [
+      "business",
+      "micro_enterprise",
+      "self_employment"
+    ],
+    "eligible_categories": [
+      "SC"
+    ],
+    "min_age": 18,
+    "max_age": 55,
+    "min_education": null,
+    "required_documents": [
+      "SC Certificate",
+      "Income Certificate (Family income under ₹5 Lakh)",
+      "Identity Proof (Aadhaar)",
+      "Address Proof",
+      "Bank Account Details",
+      "Detailed Project Report"
+    ],
+    "subsidy_info": "Concessional interest rate provided through State Channelizing Agencies (SCAs).",
+    "partner_types": [
+      "SCA"
+    ],
+    "source_url": "https://nsfdc.nic.in",
+    "data_status": "VERIFIED",
+    "active": true
+  },
+  {
+    "name": "NSFDC Micro Credit Finance",
+    "scheme_type": "MICRO_CREDIT",
+    "description": "Micro credit for small-scale income-generating activities by SC individuals. Maximum project cost ₹1.40 Lakh with very low interest rate.",
+    "min_income": null,
+    "max_income": 500000.0,
+    "min_loan": 5000.0,
+    "max_loan": 140000.0,
+    "interest_rate": 6.5,
+    "interest_rate_max": null,
+    "max_tenure": 60,
+    "moratorium": 3,
+    "eligible_purposes": [
+      "business",
+      "micro_enterprise",
+      "self_employment"
+    ],
+    "eligible_categories": [
+      "SC"
+    ],
+    "min_age": 18,
+    "max_age": 55,
+    "min_education": null,
+    "required_documents": [
+      "SC Certificate",
+      "Income Certificate",
+      "Identity Proof (Aadhaar)",
+      "Address Proof",
+      "Bank Account Details",
+      "Activity Details"
+    ],
+    "subsidy_info": "Special low interest rate of 6.5% per annum.",
+    "partner_types": [
+      "SCA",
+      "NBFC_MFI"
+    ],
+    "source_url": "https://nsfdc.nic.in",
+    "data_status": "VERIFIED",
+    "active": true
+  },
+  {
     "name": "Ayushman Bharat (PM-JAY)",
     "scheme_type": "SUBSIDY",
     "description": "Comprehensive cashless health insurance coverage up to ₹5 Lakh per year per family for secondary and tertiary hospitalisation. Senior citizens aged 70+ get an exclusive separate ₹5 Lakh top-up cover via the Ayushman Vaya Vandana Card.",
     "min_income": null,
     "max_income": null,
-    "min_loan": 0,
-    "max_loan": 500000,
+    "min_loan": 0.0,
+    "max_loan": 500000.0,
     "interest_rate": 0.0,
     "interest_rate_max": null,
     "max_tenure": 12,
     "moratorium": 0,
-    "eligible_purposes": ["healthcare", "social_security", "medical"],
-    "eligible_categories": ["SC", "ST", "OBC", "GENERAL"],
+    "eligible_purposes": [
+      "healthcare",
+      "social_security",
+      "medical"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST",
+      "OBC",
+      "GENERAL"
+    ],
     "min_age": 0,
     "max_age": null,
     "min_education": null,
-    "required_documents": ["Aadhaar Card", "Ration Card / Family Card", "Age Proof (for 70+ Vaya Vandana)"],
+    "required_documents": [
+      "Aadhaar Card",
+      "Ration Card / Family Card",
+      "Age Proof (for 70+ Vaya Vandana)"
+    ],
     "subsidy_info": "100% cashless treatment at all empaneled public and private hospitals across India.",
-    "partner_types": ["PSB", "SCA"],
+    "partner_types": [
+      "PSB",
+      "SCA"
+    ],
     "source_url": "https://nha.gov.in/PM-JAY",
-    "data_status": "VERIFIED"
+    "data_status": "VERIFIED",
+    "active": true
   },
   {
     "name": "Atal Pension Yojana (APY)",
@@ -28,45 +459,79 @@
     "description": "Guaranteed monthly pension ranging from ₹1,000 to ₹5,000 post-60 years of age based on contribution amount, backed by Government of India.",
     "min_income": null,
     "max_income": null,
-    "min_loan": 0,
-    "max_loan": 5000,
+    "min_loan": 0.0,
+    "max_loan": 5000.0,
     "interest_rate": 0.0,
     "interest_rate_max": null,
     "max_tenure": 0,
     "moratorium": 0,
-    "eligible_purposes": ["social_security", "pension", "self_employment"],
-    "eligible_categories": ["SC", "ST", "OBC", "GENERAL"],
+    "eligible_purposes": [
+      "social_security",
+      "pension",
+      "self_employment"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST",
+      "OBC",
+      "GENERAL"
+    ],
     "min_age": 18,
     "max_age": 40,
     "min_education": null,
-    "required_documents": ["Aadhaar Card", "Savings Bank Account Details", "Linked Mobile Number"],
+    "required_documents": [
+      "Aadhaar Card",
+      "Savings Bank Account Details",
+      "Linked Mobile Number"
+    ],
     "subsidy_info": "Government co-contribution for eligible subscribers. Subscriber receives life-long assured pension.",
-    "partner_types": ["PSB", "RRB"],
+    "partner_types": [
+      "PSB",
+      "RRB"
+    ],
     "source_url": "https://www.npscra.nsdl.co.in/scheme-details.php",
-    "data_status": "VERIFIED"
+    "data_status": "VERIFIED",
+    "active": true
   },
   {
     "name": "PM Shram Yogi Maan-dhan (PM-SYM)",
     "scheme_type": "SUBSIDY",
     "description": "Old age protection and social security scheme for unorganized workers. Assures a minimum monthly pension of ₹3,000 after attaining age 60 with 50:50 government matching contribution.",
     "min_income": null,
-    "max_income": 180000,
-    "min_loan": 0,
-    "max_loan": 3000,
+    "max_income": 180000.0,
+    "min_loan": 0.0,
+    "max_loan": 3000.0,
     "interest_rate": 0.0,
     "interest_rate_max": null,
     "max_tenure": 0,
     "moratorium": 0,
-    "eligible_purposes": ["social_security", "pension", "self_employment"],
-    "eligible_categories": ["SC", "ST", "OBC", "GENERAL"],
+    "eligible_purposes": [
+      "social_security",
+      "pension",
+      "self_employment"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST",
+      "OBC",
+      "GENERAL"
+    ],
     "min_age": 18,
     "max_age": 40,
     "min_education": null,
-    "required_documents": ["Aadhaar Card", "e-Shram Card / Registration", "Savings Bank Account / IFSC"],
+    "required_documents": [
+      "Aadhaar Card",
+      "e-Shram Card / Registration",
+      "Savings Bank Account / IFSC"
+    ],
     "subsidy_info": "50% monthly contribution matched by Central Government into beneficiary pension account.",
-    "partner_types": ["CSC", "PSB"],
+    "partner_types": [
+      "CSC",
+      "PSB"
+    ],
     "source_url": "https://maandhan.in",
-    "data_status": "VERIFIED"
+    "data_status": "VERIFIED",
+    "active": true
   },
   {
     "name": "PM Surya Ghar: Muft Bijli Yojana",
@@ -74,68 +539,121 @@
     "description": "Solar rooftop subsidy scheme providing up to 300 units of free electricity per month. Central financial assistance: ₹30,000 for 1 kW, ₹60,000 for 2 kW, and up to ₹78,000 for 3 kW or higher systems.",
     "min_income": null,
     "max_income": null,
-    "min_loan": 0,
-    "max_loan": 78000,
+    "min_loan": 0.0,
+    "max_loan": 78000.0,
     "interest_rate": 0.0,
     "interest_rate_max": null,
     "max_tenure": 0,
     "moratorium": 0,
-    "eligible_purposes": ["housing", "energy", "solar", "sustainability"],
-    "eligible_categories": ["SC", "ST", "OBC", "GENERAL"],
+    "eligible_purposes": [
+      "housing",
+      "energy",
+      "solar",
+      "sustainability"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST",
+      "OBC",
+      "GENERAL"
+    ],
     "min_age": 18,
     "max_age": null,
     "min_education": null,
-    "required_documents": ["Aadhaar Card", "Recent Electricity Bill", "Proof of Roof Ownership / Property Tax"],
+    "required_documents": [
+      "Aadhaar Card",
+      "Recent Electricity Bill",
+      "Proof of Roof Ownership / Property Tax"
+    ],
     "subsidy_info": "Direct DBT subsidy into bank account: ₹30k (1 kW), ₹60k (2 kW), ₹78k (3 kW+). Concessional collateral-free bank loans available.",
-    "partner_types": ["PSB", "RRB"],
+    "partner_types": [
+      "PSB",
+      "RRB"
+    ],
     "source_url": "https://pmsuryaghar.gov.in",
-    "data_status": "VERIFIED"
+    "data_status": "VERIFIED",
+    "active": true
   },
   {
     "name": "Pradhan Mantri Awas Yojana (PMAY 2.0)",
     "scheme_type": "SUBSIDY",
     "description": "Housing for All initiative providing interest subsidy up to ₹2.30 Lakh to ₹2.67 Lakh on home loans for EWS, LIG, and MIG families to purchase or construct their first pucca house.",
     "min_income": null,
-    "max_income": 1800000,
-    "min_loan": 100000,
-    "max_loan": 2500000,
+    "max_income": 1800000.0,
+    "min_loan": 100000.0,
+    "max_loan": 2500000.0,
     "interest_rate": 6.5,
     "interest_rate_max": 9.0,
     "max_tenure": 240,
     "moratorium": 0,
-    "eligible_purposes": ["housing", "home_loan"],
-    "eligible_categories": ["SC", "ST", "OBC", "GENERAL"],
+    "eligible_purposes": [
+      "housing",
+      "home_loan"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST",
+      "OBC",
+      "GENERAL"
+    ],
     "min_age": 18,
     "max_age": 70,
     "min_education": null,
-    "required_documents": ["Aadhaar Card / Voter ID", "Income Certificate / Form 16", "Affidavit stating no pucca house ownership anywhere in India", "Property Title Deeds"],
+    "required_documents": [
+      "Aadhaar Card / Voter ID",
+      "Income Certificate / Form 16",
+      "Affidavit stating no pucca house ownership anywhere in India",
+      "Property Title Deeds"
+    ],
     "subsidy_info": "Upfront interest subsidy credited directly to beneficiary loan account reducing principal and EMI.",
-    "partner_types": ["PSB", "RRB", "NBFC_MFI"],
+    "partner_types": [
+      "PSB",
+      "RRB",
+      "NBFC_MFI"
+    ],
     "source_url": "https://pmaymis.gov.in",
-    "data_status": "VERIFIED"
+    "data_status": "VERIFIED",
+    "active": true
   },
   {
     "name": "Pradhan Mantri Ujjwala Yojana (PMUY)",
     "scheme_type": "SUBSIDY",
     "description": "Provides free deposit-free LPG connection to adult women from BPL and disadvantaged households, along with a targeted subsidy of ₹300 per refill for up to 12 cylinders annually.",
     "min_income": null,
-    "max_income": 300000,
-    "min_loan": 0,
-    "max_loan": 5000,
+    "max_income": 300000.0,
+    "min_loan": 0.0,
+    "max_loan": 5000.0,
     "interest_rate": 0.0,
     "interest_rate_max": null,
     "max_tenure": 0,
     "moratorium": 0,
-    "eligible_purposes": ["housing", "energy", "social_security"],
-    "eligible_categories": ["SC", "ST", "OBC", "GENERAL"],
+    "eligible_purposes": [
+      "housing",
+      "energy",
+      "social_security"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST",
+      "OBC",
+      "GENERAL"
+    ],
     "min_age": 18,
     "max_age": null,
     "min_education": null,
-    "required_documents": ["Aadhaar Card of applicant & family members", "BPL Ration Card / Antyodaya Card", "Bank Passbook"],
+    "required_documents": [
+      "Aadhaar Card of applicant & family members",
+      "BPL Ration Card / Antyodaya Card",
+      "Bank Passbook"
+    ],
     "subsidy_info": "Free stove + first cylinder connection deposit waiver + ₹300 subsidy per refill directly in bank account.",
-    "partner_types": ["SCA", "PSB"],
+    "partner_types": [
+      "SCA",
+      "PSB"
+    ],
     "source_url": "https://www.pmuy.gov.in",
-    "data_status": "VERIFIED"
+    "data_status": "VERIFIED",
+    "active": true
   },
   {
     "name": "PM Kisan Samman Nidhi (PM-KISAN)",
@@ -143,22 +661,39 @@
     "description": "Direct income support of ₹6,000 per year in three equal instalments of ₹2,000 directly transferred into the bank accounts of all landholding farmer families across India.",
     "min_income": null,
     "max_income": null,
-    "min_loan": 0,
-    "max_loan": 6000,
+    "min_loan": 0.0,
+    "max_loan": 6000.0,
     "interest_rate": 0.0,
     "interest_rate_max": null,
     "max_tenure": 12,
     "moratorium": 0,
-    "eligible_purposes": ["agriculture", "farming", "self_employment"],
-    "eligible_categories": ["SC", "ST", "OBC", "GENERAL"],
+    "eligible_purposes": [
+      "agriculture",
+      "farming",
+      "self_employment"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST",
+      "OBC",
+      "GENERAL"
+    ],
     "min_age": 18,
     "max_age": null,
     "min_education": null,
-    "required_documents": ["Aadhaar Card", "Land Ownership Documents (Khatoni / Jamabandi)", "Bank Account Details (Aadhaar linked)"],
+    "required_documents": [
+      "Aadhaar Card",
+      "Land Ownership Documents (Khatoni / Jamabandi)",
+      "Bank Account Details (Aadhaar linked)"
+    ],
     "subsidy_info": "100% direct central government cash transfer via Aadhaar-linked DBT.",
-    "partner_types": ["PSB", "RRB"],
+    "partner_types": [
+      "PSB",
+      "RRB"
+    ],
     "source_url": "https://pmkisan.gov.in",
-    "data_status": "VERIFIED"
+    "data_status": "VERIFIED",
+    "active": true
   },
   {
     "name": "PM Vishwakarma Yojana",
@@ -166,22 +701,43 @@
     "description": "Comprehensive empowerment for 18 traditional artisan trades (carpenters, blacksmiths, goldsmiths, potters, etc.). Offers ₹15,000 modern toolkit e-voucher grant, ₹500/day training stipend, and collateral-free enterprise loans up to ₹3 Lakh at an ultra-low 5% interest rate.",
     "min_income": null,
     "max_income": null,
-    "min_loan": 10000,
-    "max_loan": 300000,
+    "min_loan": 10000.0,
+    "max_loan": 300000.0,
     "interest_rate": 5.0,
     "interest_rate_max": null,
     "max_tenure": 60,
     "moratorium": 6,
-    "eligible_purposes": ["business", "artisan", "vocational", "micro_enterprise", "self_employment"],
-    "eligible_categories": ["SC", "ST", "OBC", "GENERAL"],
+    "eligible_purposes": [
+      "business",
+      "artisan",
+      "vocational",
+      "micro_enterprise",
+      "self_employment"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST",
+      "OBC",
+      "GENERAL"
+    ],
     "min_age": 18,
     "max_age": null,
     "min_education": null,
-    "required_documents": ["Aadhaar Card", "Mobile Linked to Aadhaar", "Bank Passbook", "Proof of Traditional Trade Practice"],
+    "required_documents": [
+      "Aadhaar Card",
+      "Mobile Linked to Aadhaar",
+      "Bank Passbook",
+      "Proof of Traditional Trade Practice"
+    ],
     "subsidy_info": "₹15,000 toolkit grant + 8% interest subvention by Government ensuring effective interest rate is capped at just 5%.",
-    "partner_types": ["PSB", "RRB", "SCA"],
+    "partner_types": [
+      "PSB",
+      "RRB",
+      "SCA"
+    ],
     "source_url": "https://pmvishwakarma.gov.in",
-    "data_status": "VERIFIED"
+    "data_status": "VERIFIED",
+    "active": true
   },
   {
     "name": "Pradhan Mantri MUDRA Yojana (PMMY)",
@@ -189,22 +745,41 @@
     "description": "Loans up to ₹10 Lakh without collateral for micro and small enterprises across three stages: Shishu (up to ₹50,000), Kishor (₹50,000 to ₹5 Lakh), and Tarun (₹5 Lakh to ₹10 Lakh).",
     "min_income": null,
     "max_income": null,
-    "min_loan": 10000,
-    "max_loan": 1000000,
+    "min_loan": 10000.0,
+    "max_loan": 1000000.0,
     "interest_rate": 9.5,
     "interest_rate_max": 12.5,
     "max_tenure": 60,
     "moratorium": 6,
-    "eligible_purposes": ["business", "micro_enterprise", "self_employment"],
-    "eligible_categories": ["SC", "ST", "OBC", "GENERAL"],
+    "eligible_purposes": [
+      "business",
+      "micro_enterprise",
+      "self_employment"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST",
+      "OBC",
+      "GENERAL"
+    ],
     "min_age": 18,
     "max_age": 65,
     "min_education": null,
-    "required_documents": ["Aadhaar Card / PAN Card", "Business Address Proof & Registration", "Bank Statements for the last 6 months", "Passport Photos"],
+    "required_documents": [
+      "Aadhaar Card / PAN Card",
+      "Business Address Proof & Registration",
+      "Bank Statements for the last 6 months",
+      "Passport Photos"
+    ],
     "subsidy_info": "No collateral or third-party guarantee required. Credit guarantee backed by CGFMU.",
-    "partner_types": ["PSB", "RRB", "NBFC_MFI"],
+    "partner_types": [
+      "PSB",
+      "RRB",
+      "NBFC_MFI"
+    ],
     "source_url": "https://www.mudra.org.in",
-    "data_status": "VERIFIED"
+    "data_status": "VERIFIED",
+    "active": true
   },
   {
     "name": "Stand-Up India Scheme",
@@ -212,160 +787,38 @@
     "description": "Bank loans between ₹10 Lakh and ₹1 Crore for Scheduled Caste (SC), Scheduled Tribe (ST), and/or Women entrepreneurs to set up greenfield enterprises in manufacturing, services, agri-allied, or trading.",
     "min_income": null,
     "max_income": null,
-    "min_loan": 1000000,
-    "max_loan": 10000000,
+    "min_loan": 1000000.0,
+    "max_loan": 10000000.0,
     "interest_rate": 8.5,
     "interest_rate_max": 11.5,
     "max_tenure": 84,
     "moratorium": 18,
-    "eligible_purposes": ["business", "micro_enterprise"],
-    "eligible_categories": ["SC", "ST"],
+    "eligible_purposes": [
+      "business",
+      "micro_enterprise"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST"
+    ],
     "min_age": 18,
     "max_age": null,
     "min_education": null,
-    "required_documents": ["Aadhaar Card / Voter ID", "Caste Certificate (for SC/ST category)", "Business Incorporation & Projected Balance Sheets", "Proof of Business Address", "Project Report"],
+    "required_documents": [
+      "Aadhaar Card / Voter ID",
+      "Caste Certificate (for SC/ST category)",
+      "Business Incorporation & Projected Balance Sheets",
+      "Proof of Business Address",
+      "Project Report"
+    ],
     "subsidy_info": "Up to 25% margin money can be converged with central or state subsidy schemes.",
-    "partner_types": ["PSB", "RRB"],
+    "partner_types": [
+      "PSB",
+      "RRB"
+    ],
     "source_url": "https://www.standupmitra.in",
-    "data_status": "VERIFIED"
-  },
-  {
-    "name": "NSFDC Micro Finance Scheme (MFS)",
-    "scheme_type": "MICRO_CREDIT",
-    "description": "Micro Finance Scheme for small-scale income generating activities exclusively for SC individuals. Project cost up to ₹1.40 Lakh with 90% loan assistance (max ₹1.25 Lakh) at 6.5% p.a. concessional rate.",
-    "min_income": null,
-    "max_income": 500000,
-    "min_loan": 5000,
-    "max_loan": 125000,
-    "interest_rate": 6.5,
-    "interest_rate_max": null,
-    "max_tenure": 36,
-    "moratorium": 3,
-    "eligible_purposes": ["business", "micro_enterprise", "self_employment", "vendors", "artisans"],
-    "eligible_categories": ["SC"],
-    "min_age": 18,
-    "max_age": 60,
-    "min_education": null,
-    "required_documents": ["SC Certificate", "Income Certificate (Family income under ₹5 Lakh)", "Identity Proof (Aadhaar)", "Bank Account Details", "Activity / Unit Details"],
-    "subsidy_info": "Statutory 90% loan assistance up to ₹1.25 Lakh. Quarterly repayment over 3 years with 3-month moratorium.",
-    "partner_types": ["SCA", "NBFC_MFI"],
-    "source_url": "https://nsfdc.nic.in/scheme",
-    "data_status": "VERIFIED"
-  },
-  {
-    "name": "NSFDC Term Loan Scheme",
-    "scheme_type": "TERM_LOAN",
-    "description": "Concessional term loan for income-generating activities costing from ₹1.40 Lakh up to ₹50.00 Lakh for SC entrepreneurs. Maximum loan assistance up to 90% of project cost (up to ₹45.00 Lakh) at 8.0% p.a.",
-    "min_income": null,
-    "max_income": 500000,
-    "min_loan": 140000,
-    "max_loan": 4500000,
-    "interest_rate": 8.0,
-    "interest_rate_max": null,
-    "max_tenure": 84,
-    "moratorium": 6,
-    "eligible_purposes": ["business", "micro_enterprise", "self_employment", "agriculture"],
-    "eligible_categories": ["SC"],
-    "min_age": 18,
-    "max_age": 60,
-    "min_education": null,
-    "required_documents": ["SC Certificate", "Income Certificate (Family income under ₹5 Lakh)", "Identity Proof (Aadhaar)", "Detailed Project Report (DPR)", "Land/Workplace Document", "Bank Statement"],
-    "subsidy_info": "90% project cost financing. Quarterly repayment over 7 years with 6-month moratorium (up to 12 months for plantation/construction).",
-    "partner_types": ["SCA", "PSB"],
-    "source_url": "https://nsfdc.nic.in/scheme",
-    "data_status": "VERIFIED"
-  },
-  {
-    "name": "NSFDC Aajeevika Micro-Finance Yojana",
-    "scheme_type": "MICRO_CREDIT",
-    "description": "Micro finance credit assistance through Channel Partners and NBFC-MFIs for quick livelihood activities. Project cost up to ₹1.40 Lakh with loan assistance up to ₹1.25 Lakh at 15.0% p.a.",
-    "min_income": null,
-    "max_income": 500000,
-    "min_loan": 5000,
-    "max_loan": 125000,
-    "interest_rate": 15.0,
-    "interest_rate_max": null,
-    "max_tenure": 36,
-    "moratorium": 3,
-    "eligible_purposes": ["business", "micro_enterprise", "self_employment", "vendors"],
-    "eligible_categories": ["SC"],
-    "min_age": 18,
-    "max_age": 60,
-    "min_education": null,
-    "required_documents": ["SC Certificate", "Income Certificate", "Aadhaar Card", "Bank Passbook"],
-    "subsidy_info": "Fast-track processing for immediate micro-livelihoods via empaneled NBFC-MFIs and SCAs.",
-    "partner_types": ["NBFC_MFI", "SCA"],
-    "source_url": "https://nsfdc.nic.in/scheme",
-    "data_status": "VERIFIED"
-  },
-  {
-    "name": "NSFDC Udyam Nidhi Yojana (UNY)",
-    "scheme_type": "COMPOSITE_LOAN",
-    "description": "Composite loan assistance for setting up micro-enterprises with project cost up to ₹5.00 Lakh. Maximum loan ₹4.50 Lakh at 13.0% (Co-operative Banks) to 15.0% (Small Finance Banks).",
-    "min_income": null,
-    "max_income": 500000,
-    "min_loan": 50000,
-    "max_loan": 450000,
-    "interest_rate": 13.0,
-    "interest_rate_max": 15.0,
-    "max_tenure": 60,
-    "moratorium": 3,
-    "eligible_purposes": ["business", "micro_enterprise", "self_employment", "artisans"],
-    "eligible_categories": ["SC"],
-    "min_age": 18,
-    "max_age": 60,
-    "min_education": null,
-    "required_documents": ["SC Certificate", "Income Certificate", "Aadhaar Card", "Brief Project Outline", "Bank Account Details"],
-    "subsidy_info": "Repayment over 5 years in quarterly or half-yearly installments with a 3-month moratorium period.",
-    "partner_types": ["RRB", "PSB", "SCA"],
-    "source_url": "https://nsfdc.nic.in/scheme",
-    "data_status": "VERIFIED"
-  },
-  {
-    "name": "NSFDC Educational Loan Scheme (India)",
-    "scheme_type": "EDUCATION_LOAN",
-    "description": "Concessional education loan for SC students pursuing recognized full-time professional/technical courses in India. Up to ₹40.00 Lakh (90% of course fee) at 6.0% p.a. Special 0.5% interest rebate for female students (5.5% p.a.).",
-    "min_income": null,
-    "max_income": 500000,
-    "min_loan": 50000,
-    "max_loan": 4000000,
-    "interest_rate": 6.0,
-    "interest_rate_max": null,
-    "max_tenure": 120,
-    "moratorium": 24,
-    "eligible_purposes": ["education"],
-    "eligible_categories": ["SC"],
-    "min_age": 17,
-    "max_age": 35,
-    "min_education": "12th_standard",
-    "required_documents": ["SC Certificate", "Income Certificate (< ₹5 Lakh)", "Aadhaar Card", "Admission Letter", "Approved Course Fee Structure", "Mark Sheets"],
-    "subsidy_info": "Female beneficiaries receive an exclusive 0.5% interest rebate (effective 5.5% p.a.). Moratorium covers full course duration + 1 year.",
-    "partner_types": ["SCA", "PSB"],
-    "source_url": "https://nsfdc.nic.in/scheme",
-    "data_status": "VERIFIED"
-  },
-  {
-    "name": "NSFDC Educational Loan Scheme (Abroad)",
-    "scheme_type": "EDUCATION_LOAN",
-    "description": "Concessional education loan for SC students pursuing professional/technical higher education in approved institutions abroad. Up to ₹40.00 Lakh at 7.0% p.a. (6.5% p.a. for female students).",
-    "min_income": null,
-    "max_income": 500000,
-    "min_loan": 100000,
-    "max_loan": 4000000,
-    "interest_rate": 7.0,
-    "interest_rate_max": null,
-    "max_tenure": 144,
-    "moratorium": 24,
-    "eligible_purposes": ["education"],
-    "eligible_categories": ["SC"],
-    "min_age": 17,
-    "max_age": 35,
-    "min_education": "graduate",
-    "required_documents": ["SC Certificate", "Income Certificate", "Passport & Visa", "Admission Letter", "Fee Schedule", "IELTS/GRE/GMAT Scorecard"],
-    "subsidy_info": "Repayment tenure up to 12 years with course duration + 1 year moratorium. 0.5% rebate for women.",
-    "partner_types": ["SCA", "PSB"],
-    "source_url": "https://nsfdc.nic.in/scheme",
-    "data_status": "VERIFIED"
+    "data_status": "VERIFIED",
+    "active": true
   },
   {
     "name": "PMEGP (Prime Minister's Employment Generation)",
@@ -373,21 +826,816 @@
     "description": "Credit-linked subsidy programme for setting up new micro-enterprises in manufacturing (up to ₹50 Lakh) or service sector (up to ₹20 Lakh). Provides heavy government capital subsidy on project cost.",
     "min_income": null,
     "max_income": null,
-    "min_loan": 100000,
-    "max_loan": 5000000,
+    "min_loan": 100000.0,
+    "max_loan": 5000000.0,
     "interest_rate": 9.5,
     "interest_rate_max": 12.0,
     "max_tenure": 84,
     "moratorium": 6,
-    "eligible_purposes": ["business", "micro_enterprise"],
-    "eligible_categories": ["SC", "ST", "OBC", "GENERAL"],
+    "eligible_purposes": [
+      "business",
+      "micro_enterprise"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST",
+      "OBC",
+      "GENERAL"
+    ],
     "min_age": 18,
     "max_age": null,
     "min_education": "8th_standard",
-    "required_documents": ["Identity Proof (Aadhaar)", "Address Proof", "Caste Certificate (for SC/ST/OBC)", "Education Certificate", "Detailed Project Report", "EDP Training Certificate"],
+    "required_documents": [
+      "Identity Proof (Aadhaar)",
+      "Address Proof",
+      "Caste Certificate (for SC/ST/OBC)",
+      "Education Certificate",
+      "Detailed Project Report",
+      "EDP Training Certificate"
+    ],
     "subsidy_info": "SC/ST/Women/OBC: 35% capital subsidy in rural areas, 25% in urban areas. General: 25% rural, 15% urban.",
-    "partner_types": ["PSB", "RRB"],
+    "partner_types": [
+      "PSB",
+      "RRB"
+    ],
     "source_url": "https://www.kviconline.gov.in/pmegpeportal/",
-    "data_status": "VERIFIED"
+    "data_status": "VERIFIED",
+    "active": true
+  },
+  {
+    "name": "NSFDC Micro Finance Scheme (MFS)",
+    "scheme_type": "MICRO_CREDIT",
+    "description": "Micro Finance Scheme for small-scale income generating activities exclusively for SC individuals. Project cost up to ₹1.40 Lakh with 90% loan assistance (max ₹1.25 Lakh) at 6.5% p.a. concessional rate.",
+    "min_income": null,
+    "max_income": 500000.0,
+    "min_loan": 5000.0,
+    "max_loan": 125000.0,
+    "interest_rate": 6.5,
+    "interest_rate_max": null,
+    "max_tenure": 36,
+    "moratorium": 3,
+    "eligible_purposes": [
+      "business",
+      "micro_enterprise",
+      "self_employment",
+      "vendors",
+      "artisans"
+    ],
+    "eligible_categories": [
+      "SC"
+    ],
+    "min_age": 18,
+    "max_age": 60,
+    "min_education": null,
+    "required_documents": [
+      "SC Certificate",
+      "Income Certificate (Family income under ₹5 Lakh)",
+      "Identity Proof (Aadhaar)",
+      "Bank Account Details",
+      "Activity / Unit Details"
+    ],
+    "subsidy_info": "Statutory 90% loan assistance up to ₹1.25 Lakh. Quarterly repayment over 3 years with 3-month moratorium.",
+    "partner_types": [
+      "SCA",
+      "NBFC_MFI"
+    ],
+    "source_url": "https://nsfdc.nic.in/scheme",
+    "data_status": "VERIFIED",
+    "active": true
+  },
+  {
+    "name": "NSFDC Term Loan Scheme",
+    "scheme_type": "TERM_LOAN",
+    "description": "Concessional term loan for income-generating activities costing from ₹1.40 Lakh up to ₹50.00 Lakh for SC entrepreneurs. Maximum loan assistance up to 90% of project cost (up to ₹45.00 Lakh) at 8.0% p.a.",
+    "min_income": null,
+    "max_income": 500000.0,
+    "min_loan": 140000.0,
+    "max_loan": 4500000.0,
+    "interest_rate": 8.0,
+    "interest_rate_max": null,
+    "max_tenure": 84,
+    "moratorium": 6,
+    "eligible_purposes": [
+      "business",
+      "micro_enterprise",
+      "self_employment",
+      "agriculture"
+    ],
+    "eligible_categories": [
+      "SC"
+    ],
+    "min_age": 18,
+    "max_age": 60,
+    "min_education": null,
+    "required_documents": [
+      "SC Certificate",
+      "Income Certificate (Family income under ₹5 Lakh)",
+      "Identity Proof (Aadhaar)",
+      "Detailed Project Report (DPR)",
+      "Land/Workplace Document",
+      "Bank Statement"
+    ],
+    "subsidy_info": "90% project cost financing. Quarterly repayment over 7 years with 6-month moratorium (up to 12 months for plantation/construction).",
+    "partner_types": [
+      "SCA",
+      "PSB"
+    ],
+    "source_url": "https://nsfdc.nic.in/scheme",
+    "data_status": "VERIFIED",
+    "active": true
+  },
+  {
+    "name": "NSFDC Aajeevika Micro-Finance Yojana",
+    "scheme_type": "MICRO_CREDIT",
+    "description": "Micro finance credit assistance through Channel Partners and NBFC-MFIs for quick livelihood activities. Project cost up to ₹1.40 Lakh with loan assistance up to ₹1.25 Lakh at 15.0% p.a.",
+    "min_income": null,
+    "max_income": 500000.0,
+    "min_loan": 5000.0,
+    "max_loan": 125000.0,
+    "interest_rate": 15.0,
+    "interest_rate_max": null,
+    "max_tenure": 36,
+    "moratorium": 3,
+    "eligible_purposes": [
+      "business",
+      "micro_enterprise",
+      "self_employment",
+      "vendors"
+    ],
+    "eligible_categories": [
+      "SC"
+    ],
+    "min_age": 18,
+    "max_age": 60,
+    "min_education": null,
+    "required_documents": [
+      "SC Certificate",
+      "Income Certificate",
+      "Aadhaar Card",
+      "Bank Passbook"
+    ],
+    "subsidy_info": "Fast-track processing for immediate micro-livelihoods via empaneled NBFC-MFIs and SCAs.",
+    "partner_types": [
+      "NBFC_MFI",
+      "SCA"
+    ],
+    "source_url": "https://nsfdc.nic.in/scheme",
+    "data_status": "VERIFIED",
+    "active": true
+  },
+  {
+    "name": "NSFDC Udyam Nidhi Yojana (UNY)",
+    "scheme_type": "COMPOSITE_LOAN",
+    "description": "Composite loan assistance for setting up micro-enterprises with project cost up to ₹5.00 Lakh. Maximum loan ₹4.50 Lakh at 13.0% (Co-operative Banks) to 15.0% (Small Finance Banks).",
+    "min_income": null,
+    "max_income": 500000.0,
+    "min_loan": 50000.0,
+    "max_loan": 450000.0,
+    "interest_rate": 13.0,
+    "interest_rate_max": 15.0,
+    "max_tenure": 60,
+    "moratorium": 3,
+    "eligible_purposes": [
+      "business",
+      "micro_enterprise",
+      "self_employment",
+      "artisans"
+    ],
+    "eligible_categories": [
+      "SC"
+    ],
+    "min_age": 18,
+    "max_age": 60,
+    "min_education": null,
+    "required_documents": [
+      "SC Certificate",
+      "Income Certificate",
+      "Aadhaar Card",
+      "Brief Project Outline",
+      "Bank Account Details"
+    ],
+    "subsidy_info": "Repayment over 5 years in quarterly or half-yearly installments with a 3-month moratorium period.",
+    "partner_types": [
+      "RRB",
+      "PSB",
+      "SCA"
+    ],
+    "source_url": "https://nsfdc.nic.in/scheme",
+    "data_status": "VERIFIED",
+    "active": true
+  },
+  {
+    "name": "NSFDC Educational Loan Scheme (India)",
+    "scheme_type": "EDUCATION_LOAN",
+    "description": "Concessional education loan for SC students pursuing recognized full-time professional/technical courses in India. Up to ₹40.00 Lakh (90% of course fee) at 6.0% p.a. Special 0.5% interest rebate for female students (5.5% p.a.).",
+    "min_income": null,
+    "max_income": 500000.0,
+    "min_loan": 50000.0,
+    "max_loan": 4000000.0,
+    "interest_rate": 6.0,
+    "interest_rate_max": null,
+    "max_tenure": 120,
+    "moratorium": 24,
+    "eligible_purposes": [
+      "education"
+    ],
+    "eligible_categories": [
+      "SC"
+    ],
+    "min_age": 17,
+    "max_age": 35,
+    "min_education": "12th_standard",
+    "required_documents": [
+      "SC Certificate",
+      "Income Certificate (< ₹5 Lakh)",
+      "Aadhaar Card",
+      "Admission Letter",
+      "Approved Course Fee Structure",
+      "Mark Sheets"
+    ],
+    "subsidy_info": "Female beneficiaries receive an exclusive 0.5% interest rebate (effective 5.5% p.a.). Moratorium covers full course duration + 1 year.",
+    "partner_types": [
+      "SCA",
+      "PSB"
+    ],
+    "source_url": "https://nsfdc.nic.in/scheme",
+    "data_status": "VERIFIED",
+    "active": true
+  },
+  {
+    "name": "NSFDC Educational Loan Scheme (Abroad)",
+    "scheme_type": "EDUCATION_LOAN",
+    "description": "Concessional education loan for SC students pursuing professional/technical higher education in approved institutions abroad. Up to ₹40.00 Lakh at 7.0% p.a. (6.5% p.a. for female students).",
+    "min_income": null,
+    "max_income": 500000.0,
+    "min_loan": 100000.0,
+    "max_loan": 4000000.0,
+    "interest_rate": 7.0,
+    "interest_rate_max": null,
+    "max_tenure": 144,
+    "moratorium": 24,
+    "eligible_purposes": [
+      "education"
+    ],
+    "eligible_categories": [
+      "SC"
+    ],
+    "min_age": 17,
+    "max_age": 35,
+    "min_education": "graduate",
+    "required_documents": [
+      "SC Certificate",
+      "Income Certificate",
+      "Passport & Visa",
+      "Admission Letter",
+      "Fee Schedule",
+      "IELTS/GRE/GMAT Scorecard"
+    ],
+    "subsidy_info": "Repayment tenure up to 12 years with course duration + 1 year moratorium. 0.5% rebate for women.",
+    "partner_types": [
+      "SCA",
+      "PSB"
+    ],
+    "source_url": "https://nsfdc.nic.in/scheme",
+    "data_status": "VERIFIED",
+    "active": true
+  },
+  {
+    "name": "Mukhyamantri Yuva Swavalamban Yojana (MYSY)",
+    "scheme_type": "SUBSIDY",
+    "description": "Flagship Gujarat Government higher education financial assistance scheme for students pursuing Medical (MBBS/BDS), Engineering, Pharmacy, Diploma, and Professional degree courses. Provides 50% tuition fee subsidy up to ₹2,00,000/yr, ₹1,200/month hostel allowance, and ₹10,000 book/equipment grant.",
+    "min_income": null,
+    "max_income": 600000.0,
+    "min_loan": 10000.0,
+    "max_loan": 200000.0,
+    "interest_rate": 0.0,
+    "interest_rate_max": null,
+    "max_tenure": 48,
+    "moratorium": 0,
+    "eligible_purposes": [
+      "education"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST",
+      "OBC",
+      "GENERAL"
+    ],
+    "min_age": 16,
+    "max_age": 30,
+    "min_education": "10th_standard",
+    "required_documents": [
+      "Aadhaar Card",
+      "Income Certificate (< ₹6.00 Lakh)",
+      "10th / 12th Marksheet (80+ Percentile)",
+      "College Admission Letter",
+      "College Fee Receipt",
+      "Bank Passbook",
+      "Hostel Certificate"
+    ],
+    "subsidy_info": "50% tuition subsidy (up to ₹2,00,000 for Medical, ₹50,000 for Engineering, ₹25,000 for Degree, ₹10,000 for Diploma) + ₹12,000/yr hostel lodging + ₹10,000 instrument grant.",
+    "partner_types": [
+      "SCA",
+      "PSB"
+    ],
+    "source_url": "https://mysy.guj.nic.in",
+    "data_status": "VERIFIED",
+    "active": true
+  },
+  {
+    "name": "Digital Gujarat Post-Matric Scholarship",
+    "scheme_type": "SUBSIDY",
+    "description": "Universal higher education scholarship portal by Government of Gujarat for SC, ST, and SEBC students enrolled in ITI, Polytechnic, Undergrad, Postgraduate, and PhD courses. Reimburses 100% compulsory tuition and examination fees plus monthly maintenance stipends.",
+    "min_income": null,
+    "max_income": 250000.0,
+    "min_loan": 5000.0,
+    "max_loan": 150000.0,
+    "interest_rate": 0.0,
+    "interest_rate_max": null,
+    "max_tenure": 12,
+    "moratorium": 0,
+    "eligible_purposes": [
+      "education"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST",
+      "OBC"
+    ],
+    "min_age": 15,
+    "max_age": 35,
+    "min_education": "10th_standard",
+    "required_documents": [
+      "Aadhaar Card",
+      "Caste Certificate",
+      "Income Certificate",
+      "Previous Year Marksheet",
+      "College Fee Receipt",
+      "College Bonafide Certificate",
+      "Bank Passbook"
+    ],
+    "subsidy_info": "100% tuition and examination fee waiver directly credited to Aadhaar-seeded bank account via Direct Benefit Transfer (DBT) plus monthly maintenance allowance.",
+    "partner_types": [
+      "SCA"
+    ],
+    "source_url": "https://www.digitalgujarat.gov.in",
+    "data_status": "VERIFIED",
+    "active": true
+  },
+  {
+    "name": "Dr. Ambedkar Foreign Study Loan (Gujarat GSCDC)",
+    "scheme_type": "EDUCATION_LOAN",
+    "description": "Concessional foreign study loan administered by Gujarat Scheduled Castes Development Corporation (GSCDC) for SC students pursuing postgraduate diplomas, Master's degrees, or PhD programs in accredited universities abroad.",
+    "min_income": null,
+    "max_income": 600000.0,
+    "min_loan": 100000.0,
+    "max_loan": 1500000.0,
+    "interest_rate": 4.0,
+    "interest_rate_max": null,
+    "max_tenure": 120,
+    "moratorium": 24,
+    "eligible_purposes": [
+      "education"
+    ],
+    "eligible_categories": [
+      "SC"
+    ],
+    "min_age": 18,
+    "max_age": 35,
+    "min_education": "graduate",
+    "required_documents": [
+      "Aadhaar Card",
+      "Caste Certificate",
+      "Income Certificate (< ₹6.00 Lakh)",
+      "Foreign University Admission Letter",
+      "Valid Passport & Student Visa",
+      "I-20 / CAS Certificate",
+      "Bank Statement"
+    ],
+    "subsidy_info": "Concessional 4.0% interest rate (3.5% for female students). Repayment begins 1 year after graduation or 6 months after securing employment.",
+    "partner_types": [
+      "SCA",
+      "PSB"
+    ],
+    "source_url": "https://gscdc.gujarat.gov.in",
+    "data_status": "VERIFIED",
+    "active": true
+  },
+  {
+    "name": "Kanya Kelavani Nidhi Higher Education Grant",
+    "scheme_type": "SUBSIDY",
+    "description": "Specialized Gujarat state education welfare scheme providing full financial tuition grant to female students from backward and economically weaker classes admitted to recognized medical, engineering, nursing, and professional institutes in Gujarat.",
+    "min_income": null,
+    "max_income": 600000.0,
+    "min_loan": 20000.0,
+    "max_loan": 600000.0,
+    "interest_rate": 0.0,
+    "interest_rate_max": null,
+    "max_tenure": 60,
+    "moratorium": 0,
+    "eligible_purposes": [
+      "education"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST",
+      "OBC",
+      "GENERAL"
+    ],
+    "min_age": 17,
+    "max_age": 30,
+    "min_education": "12th_standard",
+    "required_documents": [
+      "Aadhaar Card",
+      "12th Marksheet",
+      "Income Certificate",
+      "College Admission Letter",
+      "Approved Fee Structure",
+      "Bank Passbook",
+      "Gujarat Domicile Certificate"
+    ],
+    "subsidy_info": "100% financial tuition grant / interest-free financial support for female students throughout the course duration.",
+    "partner_types": [
+      "SCA"
+    ],
+    "source_url": "https://kanyadan.gujarat.gov.in",
+    "data_status": "VERIFIED",
+    "active": true
+  },
+  {
+    "name": "Central Sector Interest Subsidy (CSIS) on Education Loans",
+    "scheme_type": "SUBSIDY",
+    "description": "Ministry of Education (Govt. of India) scheme providing full 100% interest subsidy during the moratorium period (course tenure + 1 year) on educational loans availed from scheduled banks for professional and technical courses in India.",
+    "min_income": null,
+    "max_income": 450000.0,
+    "min_loan": 50000.0,
+    "max_loan": 1000000.0,
+    "interest_rate": 0.0,
+    "interest_rate_max": null,
+    "max_tenure": 120,
+    "moratorium": 24,
+    "eligible_purposes": [
+      "education"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST",
+      "OBC",
+      "GENERAL"
+    ],
+    "min_age": 17,
+    "max_age": 35,
+    "min_education": "12th_standard",
+    "required_documents": [
+      "Aadhaar Card",
+      "Income Certificate (< ₹4.50 Lakh)",
+      "Bank Loan Sanction Letter",
+      "College Bonafide Certificate",
+      "Marksheets"
+    ],
+    "subsidy_info": "100% interest subsidy reimbursed by Central Government during study and 1-year moratorium, leaving zero interest payable by student during studies.",
+    "partner_types": [
+      "PSB",
+      "RRB"
+    ],
+    "source_url": "https://www.education.gov.in/csis",
+    "data_status": "VERIFIED",
+    "active": true
+  },
+  {
+    "name": "PM SVANidhi (PM Street Vendor's AtmaNirbhar Nidhi)",
+    "scheme_type": "MICRO_CREDIT",
+    "description": "Ministry of Housing and Urban Affairs micro-credit facility empowering urban street vendors, hawkers, thela-walas, and micro-traders. Offers collateral-free working capital in 3 progressive tranches: ₹10,000 (1st), ₹20,000 (2nd), and up to ₹50,000 (3rd tranche). Features an attractive 7% interest subsidy on regular repayments and up to ₹1,200/year cashback on digital UPI transactions.",
+    "min_income": null,
+    "max_income": 300000.0,
+    "min_loan": 10000.0,
+    "max_loan": 50000.0,
+    "interest_rate": 7.0,
+    "interest_rate_max": 9.5,
+    "max_tenure": 36,
+    "moratorium": 0,
+    "eligible_purposes": [
+      "vendors",
+      "micro_enterprise",
+      "self_employment",
+      "business"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST",
+      "OBC",
+      "GENERAL"
+    ],
+    "min_age": 18,
+    "max_age": 65,
+    "min_education": null,
+    "required_documents": [
+      "Aadhaar Card",
+      "Vending Certificate / Urban Local Body (ULB) Identity Card",
+      "Letter of Recommendation (LoR) from Town Vending Committee (TVC)",
+      "Bank Account Passbook with IFSC",
+      "Passport Size Photograph"
+    ],
+    "subsidy_info": "7% interest subsidy directly credited quarterly via DBT. Monthly digital cashback up to ₹100 for digital UPI transactions (up to ₹1,200 annually).",
+    "partner_types": [
+      "PSB",
+      "RRB",
+      "NBFC_MFI"
+    ],
+    "source_url": "https://pmsvanidhi.mohua.gov.in",
+    "data_status": "VERIFIED",
+    "active": true
+  },
+  {
+    "name": "Mahila Samriddhi Yojana (NSFDC MSY)",
+    "scheme_type": "MICRO_CREDIT",
+    "description": "NSFDC's flagship micro-credit assistance exclusively for Scheduled Caste women entrepreneurs and self-help groups. Provides financial support up to ₹1,40,000 per woman at a highly subsidized 3.50% effective interest rate (4.0% statutory rate with automatic 0.50% female rebate). Includes a 6-month moratorium to assist business ramp-up.",
+    "min_income": null,
+    "max_income": 300000.0,
+    "min_loan": 10000.0,
+    "max_loan": 140000.0,
+    "interest_rate": 3.5,
+    "interest_rate_max": null,
+    "max_tenure": 42,
+    "moratorium": 6,
+    "eligible_purposes": [
+      "business",
+      "micro_enterprise",
+      "artisans",
+      "vendors"
+    ],
+    "eligible_categories": [
+      "SC"
+    ],
+    "min_age": 18,
+    "max_age": 55,
+    "min_education": null,
+    "required_documents": [
+      "Aadhaar Card",
+      "Caste Certificate (SC)",
+      "Income Certificate (< ₹3.00 Lakh)",
+      "Detailed Project Report (DPR) / Business Proposal",
+      "Supplier Quotations & Proforma Invoices",
+      "Bank Passbook & 6-Month Account Statement"
+    ],
+    "subsidy_info": "Effective 3.50% p.a. interest rate with female concession. Up to 100% project cost covered without mandatory promoter margin money.",
+    "partner_types": [
+      "SCA",
+      "RRB",
+      "NBFC_MFI"
+    ],
+    "source_url": "https://nsfdc.nic.in",
+    "data_status": "VERIFIED",
+    "active": true
+  },
+  {
+    "name": "Shri Vajpayee Bankable Yojana (Gujarat SVBY)",
+    "scheme_type": "COMPOSITE_LOAN",
+    "description": "Cottage and Village Industries Department (Government of Gujarat) scheme designed to generate self-employment for urban and rural unemployed individuals, artisans, and service providers. Provides financial assistance up to ₹8.00 Lakh for industries, ₹8.00 Lakh for services, and ₹4.00 Lakh for retail businesses, with generous capital subsidies up to 40% (max ₹1.25 Lakh) for SC/ST and women applicants.",
+    "min_income": null,
+    "max_income": 500000.0,
+    "min_loan": 25000.0,
+    "max_loan": 800000.0,
+    "interest_rate": 8.0,
+    "interest_rate_max": 10.5,
+    "max_tenure": 60,
+    "moratorium": 6,
+    "eligible_purposes": [
+      "business",
+      "artisans",
+      "micro_enterprise"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST",
+      "OBC",
+      "GENERAL"
+    ],
+    "min_age": 18,
+    "max_age": 65,
+    "min_education": "4th_standard",
+    "required_documents": [
+      "Aadhaar Card",
+      "Caste / Community Certificate",
+      "Certified Family Income Certificate",
+      "Academic Marksheets & Passing Certificates",
+      "Detailed Project Report (DPR) / Business Proposal",
+      "Supplier Quotations & Proforma Invoices",
+      "Bank Passbook & 6-Month Account Statement"
+    ],
+    "subsidy_info": "SC/ST/Women/Minority: 40% subsidy in rural areas (max ₹1,25,000) and 37.5% in urban areas (max ₹1,00,000). General category: 25% (max ₹1,00,000 rural, ₹80,000 urban).",
+    "partner_types": [
+      "PSB",
+      "RRB",
+      "SCA"
+    ],
+    "source_url": "https://cottage.gujarat.gov.in",
+    "data_status": "VERIFIED",
+    "active": true
+  },
+  {
+    "name": "PM Formalisation of Micro food processing Enterprises (PMFME)",
+    "scheme_type": "SUBSIDY",
+    "description": "Ministry of Food Processing Industries (MoFPI) flagship initiative under Atmanirbhar Bharat Abhiyan. Provides 35% credit-linked capital subsidy (up to ₹10.00 Lakh) for establishment or upgradation of micro food processing units (e.g. spice grinding, flour mill, pickle & chutney, dairy products, bakery, oil expeller, fruit pulp processing).",
+    "min_income": null,
+    "max_income": null,
+    "min_loan": 100000.0,
+    "max_loan": 3000000.0,
+    "interest_rate": 8.5,
+    "interest_rate_max": 11.0,
+    "max_tenure": 84,
+    "moratorium": 12,
+    "eligible_purposes": [
+      "agriculture",
+      "business",
+      "micro_enterprise"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST",
+      "OBC",
+      "GENERAL"
+    ],
+    "min_age": 18,
+    "max_age": 60,
+    "min_education": "8th_standard",
+    "required_documents": [
+      "Aadhaar Card",
+      "Detailed Project Report (DPR) / Business Proposal",
+      "Supplier Quotations & Proforma Invoices",
+      "FSSAI Registration / Food Business License",
+      "Bank Passbook & 6-Month Account Statement",
+      "Udyam MSME Registration Certificate"
+    ],
+    "subsidy_info": "35% credit-linked capital subsidy of eligible project cost with a maximum ceiling of ₹10,00,000 per enterprise. Beneficiary contribution is minimum 10%.",
+    "partner_types": [
+      "PSB",
+      "RRB"
+    ],
+    "source_url": "https://pmfme.mofpi.gov.in",
+    "data_status": "VERIFIED",
+    "active": true
+  },
+  {
+    "name": "Dhibar Yojana (Fisheries & Water Body Livelihood)",
+    "scheme_type": "TERM_LOAN",
+    "description": "NSFDC specialized financial assistance scheme supporting traditional fisheries, aquaculture, and water-body based livelihoods for Scheduled Caste families. Provides concessional financing up to ₹15.00 Lakh at 6.00% p.a. (5.50% p.a. for fisherwomen) with seasonal 6-9 months moratorium for procurement of fiberglass boats, mechanized engines, fishing nets, and cold storage iceboxes.",
+    "min_income": null,
+    "max_income": 500000.0,
+    "min_loan": 50000.0,
+    "max_loan": 1500000.0,
+    "interest_rate": 6.0,
+    "interest_rate_max": null,
+    "max_tenure": 60,
+    "moratorium": 9,
+    "eligible_purposes": [
+      "agriculture",
+      "business",
+      "micro_enterprise"
+    ],
+    "eligible_categories": [
+      "SC"
+    ],
+    "min_age": 18,
+    "max_age": 55,
+    "min_education": null,
+    "required_documents": [
+      "Aadhaar Card",
+      "Caste / Community Certificate",
+      "Certified Family Income Certificate",
+      "Supplier Quotations & Proforma Invoices",
+      "Bank Passbook & 6-Month Account Statement"
+    ],
+    "subsidy_info": "Concessional 6.0% p.a. interest rate with 0.5% female rebate (5.50% p.a.). Seasonal moratorium aligns with breeding and monsoon ban periods.",
+    "partner_types": [
+      "SCA",
+      "PSB",
+      "RRB"
+    ],
+    "source_url": "https://nsfdc.nic.in",
+    "data_status": "VERIFIED",
+    "active": true
+  },
+  {
+    "name": "Kisan Credit Card (KCC - Animal Husbandry & Dairy)",
+    "scheme_type": "MICRO_CREDIT",
+    "description": "Government of India subsidized short-term working capital credit for dairy farmers, goat rearing, poultry, and animal husbandry producers. Loan limit up to ₹2.00 Lakh with zero collateral at an effective interest rate of 4.00% p.a. (7% base rate with 3% prompt repayment incentive).",
+    "min_income": null,
+    "max_income": null,
+    "min_loan": 20000.0,
+    "max_loan": 200000.0,
+    "interest_rate": 4.0,
+    "interest_rate_max": 7.0,
+    "max_tenure": 36,
+    "moratorium": 0,
+    "eligible_purposes": [
+      "agriculture",
+      "self_employment"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST",
+      "OBC",
+      "GENERAL"
+    ],
+    "min_age": 18,
+    "max_age": 70,
+    "min_education": null,
+    "required_documents": [
+      "Aadhaar Card",
+      "Agricultural Land Records (7/12 & 8A Extracts)",
+      "Veterinary Certificate & Animal Health / Tagging Record",
+      "Bank Passbook & 6-Month Account Statement"
+    ],
+    "subsidy_info": "Effective interest rate of only 4% per annum upon prompt yearly repayment (Government provides 3% prompt repayment interest subvention).",
+    "partner_types": [
+      "PSB",
+      "RRB"
+    ],
+    "source_url": "https://dahd.nic.in",
+    "data_status": "VERIFIED",
+    "active": true
+  },
+  {
+    "name": "Mukhyamantri Mahila Utkarsh Yojana (MMUY Gujarat)",
+    "scheme_type": "SUBSIDY",
+    "description": "Gujarat state scheme providing 0% interest loans up to ₹1,00,000 to Joint Liability and Self-Help Groups (JLGs) of women in urban and rural areas. The entire bank interest is borne directly by the Gujarat State Government as an interest subsidy, enabling women to start home-based enterprises and handicraft trades.",
+    "min_income": null,
+    "max_income": 400000.0,
+    "min_loan": 10000.0,
+    "max_loan": 100000.0,
+    "interest_rate": 0.0,
+    "interest_rate_max": null,
+    "max_tenure": 36,
+    "moratorium": 0,
+    "eligible_purposes": [
+      "business",
+      "micro_enterprise",
+      "self_employment",
+      "artisans"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST",
+      "OBC",
+      "GENERAL"
+    ],
+    "min_age": 18,
+    "max_age": 59,
+    "min_education": null,
+    "required_documents": [
+      "Aadhaar Card",
+      "Bank Passbook & 6-Month Account Statement",
+      "Certified Family Income Certificate"
+    ],
+    "subsidy_info": "100% interest subsidy paid directly to financing bank by Gujarat State Government; loan is completely interest-free (0% interest) for beneficiaries.",
+    "partner_types": [
+      "PSB",
+      "RRB",
+      "SCA"
+    ],
+    "source_url": "https://gswan.gov.in",
+    "data_status": "VERIFIED",
+    "active": true
+  },
+  {
+    "name": "National SC-ST Hub (NSSH) Special Capital Subsidy (SCLCSS)",
+    "scheme_type": "SUBSIDY",
+    "description": "Ministry of Micro, Small and Medium Enterprises (MSME) flagship scheme offering 25% upfront capital subsidy (up to ₹25.00 Lakh) on institutional credit availed by SC/ST entrepreneurs for procurement of modern plant, machinery, testing equipment, and technology upgrade.",
+    "min_income": null,
+    "max_income": null,
+    "min_loan": 200000.0,
+    "max_loan": 10000000.0,
+    "interest_rate": 8.0,
+    "interest_rate_max": 10.5,
+    "max_tenure": 84,
+    "moratorium": 12,
+    "eligible_purposes": [
+      "business",
+      "micro_enterprise"
+    ],
+    "eligible_categories": [
+      "SC",
+      "ST"
+    ],
+    "min_age": 18,
+    "max_age": null,
+    "min_education": null,
+    "required_documents": [
+      "Aadhaar Card",
+      "Caste / Community Certificate",
+      "Udyam MSME Registration Certificate",
+      "Detailed Project Report (DPR) / Business Proposal",
+      "Supplier Quotations & Proforma Invoices",
+      "Bank Passbook & 6-Month Account Statement"
+    ],
+    "subsidy_info": "25% upfront capital subsidy on plant & machinery purchase up to a ceiling of ₹25 Lakh directly credited to borrower's term loan account.",
+    "partner_types": [
+      "PSB",
+      "SCA"
+    ],
+    "source_url": "https://www.scsthub.in",
+    "data_status": "VERIFIED",
+    "active": true
   }
 ]

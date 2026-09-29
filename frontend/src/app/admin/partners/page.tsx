@@ -210,7 +210,7 @@ export default function AdminPartnersPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 py-8">
-      <div className="container mx-auto max-w-7xl px-4">
+      <div className="w-[90%] max-w-[1700px] mx-auto px-4">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 mb-4">
           <Link href="/admin" className="text-xs font-bold text-blue-700 hover:underline">

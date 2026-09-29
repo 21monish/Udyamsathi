@@ -39,7 +39,7 @@ export default function EligibilityPage() {
 
   return (
     <div className="bg-gray-50 min-h-screen py-10">
-      <div className="container mx-auto px-4 max-w-5xl">
+      <div className="w-[90%] max-w-[1700px] mx-auto">
         {/* Page Header */}
         <div className="text-center mb-8">
           <span className="text-xs font-semibold px-3 py-1 rounded-full bg-blue-100 text-blue-800">

@@ -43,6 +43,9 @@ class AuthResponse(BaseModel):
 
 
 class ProfileUpdate(BaseModel):
+    name: Optional[str] = None
+    mobile: Optional[str] = None
+    language: Optional[str] = None
     annual_income: Optional[float] = None
     category: Optional[str] = None
     gender: Optional[str] = None
@@ -52,6 +55,32 @@ class ProfileUpdate(BaseModel):
     district: Optional[str] = None
     state: Optional[str] = None
     pincode: Optional[str] = None
+
+
+class ProfileResponse(BaseModel):
+    user_id: Union[str, UUID]
+    name: str
+    email: str
+    mobile: Optional[str] = None
+    language: str = "en"
+    role: str
+    annual_income: Optional[float] = None
+    category: Optional[str] = None
+    gender: Optional[str] = "male"
+    age: Optional[int] = None
+    occupation: Optional[str] = None
+    education_status: Optional[str] = None
+    district: Optional[str] = None
+    state: Optional[str] = None
+    pincode: Optional[str] = None
+    created_at: Optional[datetime] = None
+
+    @field_serializer("user_id")
+    def serialize_user_id(self, v: Union[str, UUID]) -> str:
+        return str(v)
+
+    class Config:
+        from_attributes = True
 
 
 class UserAdminCreate(BaseModel):

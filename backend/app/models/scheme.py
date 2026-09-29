@@ -1,14 +1,13 @@
 import uuid
 from datetime import datetime, timezone
-from sqlalchemy import Column, String, Float, Integer, Boolean, DateTime, Text
-from sqlalchemy.dialects.postgresql import UUID, JSONB, ARRAY
+from sqlalchemy import Column, String, Float, Integer, Boolean, DateTime, Text, Uuid, JSON
 from app.database import Base
 
 
 class Scheme(Base):
     __tablename__ = "schemes"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    id = Column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
     name = Column(String(255), nullable=False, index=True)
     scheme_type = Column(String(50), nullable=False)  # TERM_LOAN, MICRO_CREDIT, EDUCATION_LOAN, MUDRA, PMEGP, etc.
     description = Column(Text, nullable=False)
@@ -24,18 +23,18 @@ class Scheme(Base):
     moratorium = Column(Integer, default=0)  # Moratorium period in months
     
     # Eligibility rules (stored as structured JSON)
-    eligible_purposes = Column(JSONB, default=list)  # ["business", "education", "self_employment"]
-    eligible_categories = Column(JSONB, default=list)  # ["SC", "ST", "OBC", "GENERAL"]
+    eligible_purposes = Column(JSON, default=list)  # ["business", "education", "self_employment"]
+    eligible_categories = Column(JSON, default=list)  # ["SC", "ST", "OBC", "GENERAL"]
     min_age = Column(Integer, nullable=True)
     max_age = Column(Integer, nullable=True)
     min_education = Column(String(100), nullable=True)  # e.g., "8th_standard"
     
     # Documentation
-    required_documents = Column(JSONB, default=list)  # List of required document names
+    required_documents = Column(JSON, default=list)  # List of required document names
     subsidy_info = Column(Text, nullable=True)  # Subsidy/contribution rules
     
     # Partner types that can disburse this scheme
-    partner_types = Column(JSONB, default=list)  # ["SCA", "PSB", "RRB"]
+    partner_types = Column(JSON, default=list)  # ["SCA", "PSB", "RRB"]
     
     # Source & Verification
     source_url = Column(String(500), nullable=True)  # Official scheme document URL

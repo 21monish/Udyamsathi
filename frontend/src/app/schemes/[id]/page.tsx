@@ -6,12 +6,15 @@ import Link from 'next/link';
 import api from '@/lib/api';
 import { Scheme } from '@/types';
 import { formatCurrency } from '@/lib/utils';
+import { resolveDocumentDetail } from '@/lib/document-registry';
 
 export default function SchemeDetailPage() {
   const params = useParams();
   const router = useRouter();
   const [scheme, setScheme] = useState<Scheme | null>(null);
   const [loading, setLoading] = useState(true);
+  const [checkedDocs, setCheckedDocs] = useState<string[]>([]);
+  const [expandedDoc, setExpandedDoc] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchScheme() {
@@ -51,7 +54,7 @@ export default function SchemeDetailPage() {
 
   return (
     <div className="bg-gray-50 min-h-screen py-10">
-      <div className="container mx-auto px-4 max-w-5xl">
+      <div className="w-[90%] max-w-[1700px] mx-auto px-4">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
           <Link href="/schemes" className="hover:text-blue-600">
@@ -174,21 +177,143 @@ export default function SchemeDetailPage() {
               </ul>
             </div>
 
-            {/* Required Documents */}
-            <div className="bg-white rounded-xl shadow-sm border p-6">
-              <h2 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <span>📑</span> Mandatory Application Documents
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {scheme.required_documents?.map((doc, idx) => (
-                  <div
-                    key={idx}
-                    className="flex items-center gap-2 p-3 rounded-lg border bg-gray-50 text-xs font-medium text-gray-800"
-                  >
-                    <span className="text-blue-600 font-bold">📄</span>
-                    <span>{doc}</span>
-                  </div>
-                ))}
+            {/* Mandatory Statutory Documents with Proper Specifications */}
+            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-4">
+                <div>
+                  <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <span className="text-blue-600">📑</span> Mandatory Statutory Documents & Verification Protocol
+                  </h2>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Official issuing authorities, acceptable formats, validity periods, and desk verification criteria.
+                  </p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-bold px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
+                    {checkedDocs.length} of {scheme.required_documents?.length || 0} Prepared
+                  </span>
+                </div>
+              </div>
+
+              <div className="grid gap-3">
+                {scheme.required_documents?.map((docStr, idx) => {
+                  const doc = resolveDocumentDetail(docStr);
+                  const isChecked = checkedDocs.includes(docStr);
+                  const isExpanded = expandedDoc === docStr || (expandedDoc === null && idx === 0);
+
+                  return (
+                    <div
+                      key={idx}
+                      className={`rounded-2xl border transition-all ${
+                        isChecked
+                          ? 'border-emerald-300 bg-emerald-50/20'
+                          : 'border-slate-200 bg-white hover:border-slate-300'
+                      }`}
+                    >
+                      {/* Summary Header */}
+                      <div className="p-4 flex items-start justify-between gap-3">
+                        <div className="flex items-start gap-3 flex-1">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setCheckedDocs((prev) =>
+                                prev.includes(docStr) ? prev.filter((d) => d !== docStr) : [...prev, docStr]
+                              );
+                            }}
+                            className="mt-0.5 text-slate-400 hover:text-emerald-600 transition shrink-0"
+                            title="Mark document as prepared"
+                          >
+                            {isChecked ? (
+                              <span className="inline-flex h-5 w-5 items-center justify-center rounded-md bg-emerald-600 text-white text-xs font-bold">
+                                ✓
+                              </span>
+                            ) : (
+                              <span className="inline-flex h-5 w-5 items-center justify-center rounded-md border-2 border-slate-300 bg-white text-xs"></span>
+                            )}
+                          </button>
+
+                          <div className="flex-1">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <h3 className={`text-sm font-bold ${isChecked ? 'text-emerald-950 line-through' : 'text-slate-900'}`}>
+                                {doc.name}
+                              </h3>
+                              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 uppercase">
+                                {doc.categoryLabel}
+                              </span>
+                              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">
+                                Mandatory
+                              </span>
+                            </div>
+                            <p className="text-xs text-slate-500 mt-1">
+                              <strong>Issuing Authority:</strong> {doc.issuingAuthority}
+                            </p>
+                          </div>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => setExpandedDoc(expandedDoc === docStr ? '' : docStr)}
+                          className="px-2.5 py-1 text-xs font-bold text-blue-600 hover:bg-blue-50 rounded-lg transition shrink-0"
+                        >
+                          {isExpanded ? 'Hide Specs ↑' : 'View Specs ↓'}
+                        </button>
+                      </div>
+
+                      {/* Expandable Proper Document Details */}
+                      {isExpanded && (
+                        <div className="px-4 pb-4 pt-3 border-t border-slate-100 grid grid-cols-1 md:grid-cols-2 gap-3 text-xs bg-slate-50/70 rounded-b-2xl">
+                          <div>
+                            <span className="text-[10px] uppercase font-bold text-slate-400 block mb-0.5">
+                              Statutory Purpose & Requirement
+                            </span>
+                            <p className="text-slate-700 leading-relaxed">{doc.statutoryPurpose}</p>
+                          </div>
+
+                          <div>
+                            <span className="text-[10px] uppercase font-bold text-slate-400 block mb-0.5">
+                              Acceptable Formats & Required Copies
+                            </span>
+                            <p className="text-slate-700">{doc.acceptableFormats}</p>
+                            <p className="text-[11px] font-medium text-slate-500 mt-1">
+                              <strong>Copies to carry:</strong> {doc.copiesRequired}
+                            </p>
+                          </div>
+
+                          <div>
+                            <span className="text-[10px] uppercase font-bold text-slate-400 block mb-0.5">
+                              Validity & Recency
+                            </span>
+                            <p className="text-slate-700">{doc.validityPeriod}</p>
+                          </div>
+
+                          <div>
+                            <span className="text-[10px] uppercase font-bold text-amber-700 block mb-0.5">
+                              Common Rejection Pitfalls
+                            </span>
+                            <p className="text-slate-600">{doc.commonPitfalls}</p>
+                          </div>
+
+                          <div className="md:col-span-2 pt-2 border-t border-slate-200/60 flex flex-wrap items-center justify-between gap-2">
+                            <span className="text-[11px] text-slate-500">
+                              <strong>How to Obtain:</strong> {doc.howToObtain}
+                            </span>
+                            {doc.portalUrl && (
+                              <a
+                                href={doc.portalUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:underline"
+                              >
+                                <span>Official Portal / Apply Link</span>
+                                <span>&rarr;</span>
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
