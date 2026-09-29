@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.pool import NullPool
 from app.config import get_settings
 
 settings = get_settings()
@@ -12,6 +13,11 @@ if db_url.startswith("postgres://"):
 engine_options = {"pool_pre_ping": True}
 if db_url.startswith("sqlite"):
     engine_options["connect_args"] = {"check_same_thread": False}
+elif "pooler.supabase.com" in db_url:
+    # Supabase transaction pooler (port 6543) manages server-side connections.
+    # Disable SQLAlchemy's client pool to avoid stale/reused transaction sessions.
+    engine_options["poolclass"] = NullPool
+    engine_options["connect_args"] = {"sslmode": "require"}
 else:
     engine_options["pool_recycle"] = 300
     engine_options["pool_size"] = 10
