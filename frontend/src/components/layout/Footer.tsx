@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight, HeartHandshake, Landmark } from 'lucide-react';
 
@@ -13,7 +14,9 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.45fr_1fr_1fr_1fr]">
           <div className="max-w-sm">
             <div className="flex items-center gap-2.5">
-              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#f4cf70] font-extrabold text-[#073b35] shadow-lg shadow-black/15">US</div>
+              <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-2xl bg-white shadow-lg shadow-black/15">
+                <Image src="/images/udyamsathi-mark.png" alt="UdyamSathi" width={44} height={44} className="h-full w-full object-contain" />
+              </div>
               <div><p className="font-extrabold tracking-tight">UdyamSathi</p><p className="text-[10px] font-bold tracking-[.16em] text-[#f4cf70]">NSFDC LENDING ACCESS</p></div>
             </div>
             <p className="mt-5 text-sm leading-relaxed text-emerald-50/70">Clear, guided access to government financial assistance for every entrepreneur with an idea worth growing.</p>

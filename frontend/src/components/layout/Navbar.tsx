@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth';
@@ -45,8 +46,8 @@ export default function Navbar() {
       <div className="mx-auto flex h-[72px] w-[90%] max-w-[1700px] items-center justify-between">
         {/* Brand Logo */}
         <Link href="/" className="group flex items-center gap-2.5">
-          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0d5c4e] to-[#073b35] text-sm font-bold text-[#f4cf70] shadow-md shadow-emerald-950/20 transition-transform duration-300 group-hover:rotate-3">
-            US
+          <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-2xl bg-white shadow-md shadow-emerald-950/20 ring-1 ring-emerald-950/10 transition-transform duration-300 group-hover:rotate-3">
+            <Image src="/images/udyamsathi-mark.png" alt="UdyamSathi" width={44} height={44} className="h-full w-full object-contain" priority />
           </div>
           <div>
             <p className="font-extrabold text-base leading-4 text-slate-900 tracking-tight">UdyamSathi</p>

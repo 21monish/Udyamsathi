@@ -7,6 +7,9 @@ import Footer from '@/components/layout/Footer';
 export const metadata: Metadata = {
   title: 'UdyamSathi - AI-Driven Scheme Matching for Entrepreneurs',
   description: 'Find the right government financial assistance scheme based on your eligibility. Get personalized recommendations, EMI calculations, and locate nearby channel partners.',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({
